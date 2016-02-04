@@ -1,0 +1,20 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <StackLayout  orientation="vertical">
+  
+    <Button id="changes" text="changes" tap="{{ gotoView }}" />
+    <Image id="change-edit" src="res://ic_menu_delete" tap="delete" />
+    <Image id="change-add" src="res://ic_menu_delete" tap="delete" />
+    <Button id="clients" text="clients" tap="{{ gotoView }}" />
+    <Button id="details" text="details" tap="{{ gotoView }}" />
+    <Button id="main" text="main" tap="{{ gotoView }}" />
+    <Button id="user" text="user" tap="{{ gotoView }}" />
+    <Button id="projects" text="projects" tap="{{ gotoView }}" />
+    <Button id="calendar" text="calendar" tap="{{ gotoView }}" />
+    
+    <Button id="drop" text="drop" tap="{{ drop }}" />
+    
+    <Button id="test" text="test" tap="{{ test }}" />
+    <Button id="email" text="email" tap="{{ gotoView }}" />
+    
+  </StackLayout>
+</Page>

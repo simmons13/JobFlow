@@ -1,0 +1,24 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  
+    <Page.actionBar>
+        <ActionBar title="JobFlow">
+            <ActionBar.actionItems>
+                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
+                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
+                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="projects" tap="gotoView" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+  
+  <StackLayout orientation="vertical">
+    
+    <Label text="The following will be viewed by your client" class="title"/>
+    <TextField id="email" text="{{ email }}" keyboardType="text" autocorrect="true" autocapitalizationType="none" />
+          
+    <Button id="sendorder" text="Send" tap="{{ sendOrder }}" />
+    <Button id="sendemail" text="Email" tap="{{ sendEmail }}" />
+    <Button id="main" text="Discard" tap="{{ gotoView }}" />
+    
+  </StackLayout>
+</Page>

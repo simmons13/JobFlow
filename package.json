@@ -1,0 +1,13 @@
+{
+  "nativescript": {
+    "id": "org.nativescript.JobFlow",
+    "tns-android": {
+      "version": "1.5.1"
+    }
+  },
+  "dependencies": {
+    "nativescript-email": "^1.1.1",
+    "nativescript-sqlite": "^1.0.7",
+    "tns-core-modules": "1.5.2"
+  }
+}

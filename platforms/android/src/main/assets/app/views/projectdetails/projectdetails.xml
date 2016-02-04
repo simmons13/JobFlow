@@ -1,0 +1,25 @@
+<Page loaded="loaded">
+
+    <Page.actionBar>
+        <ActionBar title="JobFlow">
+            <ActionBar.actionItems>
+                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
+                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
+                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="projects-new" tap="gotoView" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    
+    <GridLayout>
+        <ListView items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap">
+            <ListView.itemTemplate>
+                <GridLayout columns="10, *, *" rows="*, *">
+                    <Label text="{{ projectssummary }}" horizontalAlignment="left" verticalAlignment="center" row="0" colSpan="3" />
+                    <Label text="{{ change }}" horizontalAlignment="left" verticalAlignment="center" row="1" col="1"/>
+                    <Label text="{{ status }}" horizontalAlignment="right" verticalAlignment="center" row="1" col="2"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

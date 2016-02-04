@@ -1,0 +1,163 @@
+module.exports = {};
+module.exports.pushUrl = "http://staciesimmons.com/JobFlow/changeExist.php",
+module.exports.emailUrl = "http://staciesimmons.com/JobFlow/acceptChange.php",
+module.exports.projects = {
+    stage: "projects",
+    intro: "Fill out details on the project",
+    properties: [
+        {id:"id", type:"key"},
+        {id:"summary", type:"textarea", title:"Enter a summary of the project"},
+        {id:"client", type:"hidden"},
+        {id:"orig_total", type:"text", title:"Contract total cost"},
+        {id:"orig_competion_date", type:"date", title:"Contract completion date"},
+        {id:"current_competion_date", type:"hidden"},
+        {id:"current_total", type:"hidden"},
+        {id:"contract_date", type:"date", title:"Contract sign date"}
+    ],
+    create: "CREATE TABLE IF NOT EXISTS projects ( "+
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "summary VARCHAR(50), " +
+            "client INTEGER, " +
+            "orig_total VARCHAR(50), " +
+            "orig_competion_date VARCHAR(50), " + 
+            "current_competion_date VARCHAR(50), " + 
+            "current_total VARCHAR(50), " +
+            "contract_date VARCHAR(50) )",
+    add: "INSERT INTO projects ( "+
+            "summary, client, orig_total, orig_competion_date, current_competion_date, current_total, contract_date" +
+            ") VALUES (" + 
+            "'&summary&', '&client&', '&orig_total&', '&orig_competion_date&', '&current_competion_date&', '&current_total&', '&contract_date&'" +
+            ")",
+    select: "SELECT * FROM projects t WHERE &cond&",
+    goto: "projectdetails"
+};
+module.exports.user = {
+    stage: "user",
+    intro: "Tell us about you and your company",
+    properties: [
+        {id:"id", type:"key"},
+        {id:"firstname", type:"text", title:"First name"},
+        {id:"lastname", type:"text", title:"Last name"},
+        {id:"phone", type:"tel", title:"Phone number"},
+        {id:"companyname", type:"text", title:"Company name"},
+        {id:"companylogo", type:"file", title:"Company logo"}
+    ],
+    create: "CREATE TABLE IF NOT EXISTS user ( "+
+            "id INTEGER PRIMARY KEY, " +
+            "firstname VARCHAR(50), " +
+            "lastname VARCHAR(50), " +
+            "phone VARCHAR(30), " +
+            "companyname VARCHAR(50), " +
+            "companylogo VARCHAR(50) )",
+    add: "INSERT INTO user ( "+
+            "firstname, lastname, phone, companyname, companylogo" +
+            ") VALUES (" + 
+            "'&firstname&', '&lastname&', '&phone&', '&companyname&', '&companylogo&'" +
+            ")",
+    select: "SELECT * FROM user WHERE &cond&",
+    prepopulateCheck: "SELECT * FROM user WHERE id=1",
+    goto: "details"
+};
+
+module.exports.clients = {
+    properties: [
+        {id:"id", type:"key"},
+        {id:"firstname", type:"text", title:"First name"},
+        {id:"lastname", type:"text", title:"Last name"},
+        {id:"address", type:"text", title:"Address"},
+        {id:"phone", type:"tel", title:"Phone number"},
+        {id:"email", type:"email", title:"Email"}
+    ],
+    create: "CREATE TABLE IF NOT EXISTS clients ( "+
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "firstname VARCHAR(50), " +
+            "lastname VARCHAR(50), " +
+            "address VARCHAR(100), " +
+            "phone VARCHAR(30), " +
+            "email VARCHAR(100) )",
+    add: "INSERT INTO clients ( "+
+            "firstname, lastname, address, phone, email" +
+            ") VALUES (" + 
+            "'&firstname&', '&lastname&', '&address&', '&phone&', '&email&'" +
+            ")",
+    select: "SELECT * FROM clients t WHERE &cond& ",
+    goto: "projects"
+};
+module.exports.changes = {
+    stage: 'changes',
+    intro: "Fill in details about the Change Order",
+    properties: [
+        {id:"id", type:"key"},
+        {id:"summary", type:"textarea", title:"Enter change summary"},
+        {id:"status", type:"hidden"},
+        {id:"project", type:"hidden"},
+    ],
+    create: "CREATE TABLE IF NOT EXISTS changes ( "+
+            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "summary VARCHAR(50), " +
+            "project INTEGER, " +
+            "status INTEGER )",
+    add: "INSERT INTO changes ( "+
+            "summary, project, status " +
+            ") VALUES (" + 
+            "'&summary&', '&project&', -1" +
+            ")",
+    update: "UPDATE changes ( "+
+            "summary, project " +
+            ") VALUES (" + 
+            "'&summary&', '&project&', '&status&'" +
+            ") WHERE &cond&",
+    select: "SELECT * FROM changes t WHERE &cond&",
+    goto: "email"
+}; 
+module.exports.details = {
+    stage: "details",
+    properties: [
+        {id:"id", type:"key"},
+        {id:"summary", type:"text"},
+        {id:"project", type:"hidden"},
+    ],
+    select: "SELECT " +
+        "p.summary as psummary, " +
+        "p.id as pid, " +   
+        "p.client as pclient " +
+        //"c.project, " +
+        //"c.summary as csummary, " +
+        //"c.id as cid, " +
+        //"c.status as cstatus " +
+        //"p.orig_total, p.orig_competion_date, p.current_competion_date, " +
+        //"p.current_total, p.contract_date" +        
+        "FROM projects AS p " 
+        //"JOIN changes AS c " 
+        //"ON p.id=c.project "
+};  
+
+module.exports.projectdetails = {
+    stage: "projectdetails",
+    properties: [
+        {id:"id", type:"key"},
+        {id:"summary", type:"text"},
+        {id:"change", type:"text"},
+    ],
+    select: "SELECT " +
+        "p.summary as psummary, " +
+        "p.id as pid, " +   
+        "p.client as pclient, " +
+        "c.id as cid, " +
+        "c.summary as csummary, " +
+        "c.status as cstatus " +
+        //"p.orig_total, p.orig_competion_date, p.current_competion_date, " +
+        //"p.current_total, p.contract_date" +        
+        "FROM projects AS p " +
+        "JOIN changes AS c " +  
+        //"ON &cond& " 
+        //"ON p.id=c.project " +
+        "WHERE &cond& AND pid = c.project"
+};  
+
+module.exports.status = {
+    "-1": "Send email",
+    "0": "Waiting response",
+    "1": "Accepted",
+    "2": "Rejected"
+}

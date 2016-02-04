@@ -1,0 +1,31 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  
+    <Page.actionBar>
+        <ActionBar title="JobFlow">
+            <ActionBar.actionItems>
+                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
+                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
+                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="projects" tap="gotoView" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+  
+  <StackLayout orientation="vertical">
+  
+    <Label text="Tell us about you and your company" class="title"/>
+    <TextField id="firstname" text="{{ firstname }}" hint="First name" keyboardType="text" autocorrect="false" autocapitalizationType="Words" />
+    <TextField id="lastname" text="{{ lastname }}" hint="Last name" keyboardType="text" autocorrect="false" autocapitalizationType="Words" />
+    <TextField id="phone" text="{{ phone }}" hint="Phone number" keyboardType="phone" autocorrect="false" autocapitalizationType="none" />
+    <TextField id="companyname" text="{{ companyname }}" hint="Company Name" keyboardType="text" autocorrect="false" autocapitalizationType="Words" />
+    <TextField id="companylogo" text="{{ companylogo }}" hint="Company logo" keyboardType="logo" autocorrect="false" autocapitalizationType="none" />
+  
+  
+    <!-- Button id="start" text="Start" tap="{{ startForm }}" />
+    <Button id="load" text="Load" tap="{{ loadForm }}" />
+    <Button id="main" text="Discard" tap="{{ gotoView }}" /-->
+    <Button id="drop" text="Drop" tap="{{ drop }}" />
+    <Button id="save" text="Save" tap="{{ saveForm }}" />
+    
+  </StackLayout>
+</Page>
