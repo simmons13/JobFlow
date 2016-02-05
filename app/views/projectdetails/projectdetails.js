@@ -34,9 +34,17 @@ exports.loaded = function(i_args) {
 
 exports.detailsItemTap = function(i_args) {
     
-    var obj = i_args.view; 
-    var id = obj.bindingContext.id;
-    console.error("CHANGE ID:"+id);
-    appSettings.setString("changesid", id+"");
+    var target = i_args.object;
+    var index = target.index;
+
+    var selected = detailsList.getItem(i_args.index);
+    console.error("~~~~~~~~~~~listView item:"+detailsList.getItem(i_args.index));
+    for (s in detailsList.getItem(i_args.index) ) {
+        console.error("~~~~~~~~~~~" + s + ":"+ detailsList.getItem(i_args.index)[s]);
+    }
+    
+    console.error("CHANGE ID:"+selected.changesid);
+    appSettings.setString("changesid", selected.changesid+"");
+    
     scripts.gotoView("email");
 }

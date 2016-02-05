@@ -16,6 +16,10 @@ exports.loaded = function(i_args) {
 
 	page = i_args.object;
     
+
+    scripts.appData("string", "userid");
+    scripts.appData("number", "requests", 0, {IFNULL:1});
+    
     // clear specific IDs
     //appSettings.setString("changes","");
     //appSettings.setString("projects","");
@@ -50,8 +54,17 @@ exports.loaded = function(i_args) {
 
 exports.detailsItemTap = function(i_args) {
     
-    var id = i_args && i_args.view ? i_args.view.bindingContext.id : 1;
-    console.error("ITEM ID:"+id);
-    appSettings.setString("project", id+"");
+    var target = i_args.object;
+    var index = target.index;
+
+    var selected = detailsList.getItem(i_args.index);
+    console.error("~~~~~~~~~~~listView item:"+detailsList.getItem(i_args.index));
+    for (s in detailsList.getItem(i_args.index) ) {
+        console.error("~~~~~~~~~~~" + s + ":"+ detailsList.getItem(i_args.index)[s]);
+    }
+    
+    appSettings.setString("projectsid", selected.projectsid+"");
+    appSettings.setString("clientsid", selected.clientsid+"");
+    
     scripts.gotoView("projectdetails");
 }

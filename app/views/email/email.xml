@@ -13,13 +13,10 @@
   
   <StackLayout orientation="vertical">
     
-    <Label text="The following will be viewed by your client" class="title"/>
+    <Label text="The following will be sent to your client" class="title"/>
     <TextField id="email" text="{{ email }}" keyboardType="text" autocorrect="true" autocapitalizationType="none" />
-    
-    <Button id="request" text="request" tap="{{ request }}" />      
+         
     <Button id="sendorder" text="Send" tap="{{ sendOrder }}" />
-    <Button id="sendemail" text="Email" tap="{{ sendEmail }}" />
-    <Button id="main" text="Discard" tap="{{ gotoView }}" />
     
   </StackLayout>
 </Page>

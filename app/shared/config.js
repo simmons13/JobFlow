@@ -1,8 +1,8 @@
 module.exports = {};
 module.exports.addChangeUrl = "http://staciesimmons.com/JobFlow/addChange.php",
 module.exports.changeExistUrl = "http://staciesimmons.com/JobFlow/changeExist.php",
-module.exports.emailChangeUrl = "http://staciesimmons.com/JobFlow/acceptChange.php",
-module.exports.projects = {
+module.exports.acceptChangeUrl = "http://staciesimmons.com/JobFlow/acceptChange.php",
+module.exports.projects = { 
     stage: "projects",
     intro: "Fill out details on the project",
     properties: [
@@ -29,7 +29,7 @@ module.exports.projects = {
             ") VALUES (" + 
             "'&projectssummary&', '&client&', '&orig_total&', '&orig_competion_date&', '&current_competion_date&', '&current_total&', '&contract_date&'" +
             ")",
-    select: "SELECT * FROM projects t WHERE &cond&",
+    select: "SELECT * FROM projects t",
     goto: "projectdetails"
 };
 module.exports.user = {
@@ -81,7 +81,7 @@ module.exports.clients = {
             ") VALUES (" + 
             "'&firstname&', '&lastname&', '&address&', '&phone&', '&email&'" +
             ")",
-    select: "SELECT * FROM clients t WHERE &cond& ",
+    select: "SELECT * FROM clients t",
     goto: "projects"
 };
 module.exports.changes = {
@@ -99,48 +99,61 @@ module.exports.changes = {
             "project INTEGER, " +
             "status INTEGER )",
     add: "INSERT INTO changes ( "+
-            "changessummary, project, status " +
+            "changesid, changessummary, project, status " +
             ") VALUES (" + 
-            "'&changessummary&', '&project&', -1" +
+            "'&changesid&', '&changessummary&', '&project&', -1" +
             ")",
-    update: "UPDATE changes ( "+
-            "changessummary, project " +
-            ") VALUES (" + 
-            "'&changessummary&', '&project&', '&status&'" +
-            ") WHERE &cond&",
-    select: "SELECT * FROM changes t WHERE &cond&",
+    update: "UPDATE changes SET &cond& WHERE changesid=&changesid& ",
+    select: "SELECT * FROM changes t",
     goto: "email"
 }; 
 module.exports.details = {
     stage: "details",
+    ids: ["userid"],
     properties: [
         {id:"projectid", type:"key"},
         {id:"projectsummary", type:"text"},
         {id:"project", type:"hidden"},
     ],
     select: "SELECT * " +   
-        "FROM projects  " + 
-        "LEFT OUTER JOIN changes  " +
+        "FROM projects " + 
+        "LEFT OUTER JOIN changes " +
         "ON projectsid = project "
 };  
 
 module.exports.projectdetails = {
     stage: "projectdetails",
+    ids: ["userid", "projectsid", "clientsid"],
     properties: [
         {id:"projectid", type:"key"},
         {id:"projectsummary", type:"text"},
         {id:"change", type:"text"},
     ],
     select: "SELECT * " +   
-        "FROM projects  " + 
-        "LEFT OUTER JOIN changes  " +
+        "FROM changes " + 
+        "JOIN projects " +
         "ON projectsid = project " +
         "WHERE &cond&"
-};  
+};
+
+module.exports.email = {
+    stage: "email",
+    ids: ["userid", "projectsid", "clientsid", "changesid"],
+    select: "SELECT * " +   
+        "FROM changes " + 
+        "JOIN projects " +
+        "ON projectsid = project " +
+        "WHERE &cond&" +
+        "JOIN clients " +
+        "ON clientsid = client " +
+        "JOIN user " +
+        "ON userid = user"
+};
+
 
 module.exports.status = {
     "-1": "Send email",
-    "0": "Waiting response",
-    "1": "Accepted",
-    "2": "Rejected"
+     "0": "Waiting response",
+     "1": "Accepted",
+     "2": "Rejected"
 }

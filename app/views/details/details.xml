@@ -1,7 +1,7 @@
 <Page loaded="loaded">
 
     <Page.actionBar>
-        <ActionBar title="JobFlow">
+        <ActionBar title="JobFlow" cssClass="custom-actionbar">
             <ActionBar.actionItems>
                 <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
                 <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
@@ -12,7 +12,7 @@
     </Page.actionBar>
     
     <GridLayout>
-        <ListView items="{{ detailsList }}" id="detailsList" index="{{ projectid }}" itemTap="detailsItemTap">
+        <ListView items="{{ detailsList }}" id="detailsList" itemTap="detailsItemTap">
             <ListView.itemTemplate>
                 <GridLayout columns="10, *, *" rows="*, *">
                     <Label text="{{ summary }}" horizontalAlignment="left" verticalAlignment="center" row="0" colSpan="3" />

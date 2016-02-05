@@ -9,32 +9,9 @@ function DetailsListViewModel(items) {
 
     viewModel.load = function() {
 
-        //var currentView = appSettings.getString("currentView");
-        /*
-        var sqlAction = config.details.select;
-        var items = config.details.properties;
-
-        for (var i=0; i<items.length; i++) {
-            var formId = items[i].id;
-            var formItem = this.get(formId);
-            console.error(formId +" "+ formItem);
-
-            if (this[formId] !== undefined) {
-                sqlAction = sqlAction.replace("&"+ formId +"&", formItem);
-            }
-            /*else if (current[sID]) {
-                sqlAction = sqlAction.replace("&"+ sID +"&",current[sID]);
-            }*/
-       // }
-
-
-        //console.error(">> "+sqlAction);
-        // var sqlAction = scripts.createSQL("details");
-
         var sqlAction = config["details"].select;// + appSettings.getString("projects");
         var items = config["details"].properties;
         var formId, formItem, viewId;
-        //var _this = i_this ? i_this : this;
 
         // go through properties to update SQL
         for (var i=0; i<items.length; i++) {
@@ -68,7 +45,9 @@ function DetailsListViewModel(items) {
                     id: i_result.projectsid,
                     summary: i_result.projectssummary,
                     change: i_result.changessummary,
-                    status: config.status[i_result.status]
+                    status: config.status[i_result.status],
+                    clientsid: i_result.client,
+                    projectsid: i_result.projectsid
                 });
             }
         }
@@ -80,8 +59,8 @@ function DetailsListViewModel(items) {
         }
     };
 
-    viewModel.add = function(details) {
-        viewModel.push({ summary: details, id: data.Result.Id });
+    viewModel.get = function(index) {
+        return viewModel[index];
     };
 
     viewModel.delete = function(index) {

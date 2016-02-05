@@ -14,15 +14,11 @@
   <StackLayout orientation="vertical">
     
     <Label text="Fill in details about the Change Order" class="title"/>
-    <TextField id="changessummary" text="{{ changessummary }}" hint="Change Summary" keyboardType="text" autocorrect="true" autocapitalizationType="Sentences" />
+    <TextField id="changessummary" text="{{ changessummary }}" hint="Change Summary" keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
     <TextField id="project" text="{{ project }}" hint="project id" keyboardType="text" autocorrect="true" autocapitalizationType="none" />
     
-    
-    <Button id="start" text="Start" tap="{{ startForm }}" />
+    <Button id="save" text="Save" tap="{{ saveForm }}" />
     <Button id="drop" text="Drop" tap="{{ drop }}" />
-    <Button id="load" text="Load" tap="{{ loadForm }}" />
-    <Button id="main" text="Discard" tap="{{ gotoView }}" />
-   <Button id="save" text="Save" tap="{{ saveForm }}" />
     
   </StackLayout>
 </Page>
