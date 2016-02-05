@@ -86,8 +86,27 @@ function SQL(sqlstatement, callback, options){
         }
     });
 
+/*
+    db_promise.then(function(db) {
+        // This should ALWAYS be true, db object is open in the "then"
+        console.log("Are we open yet (Inside Promise)? ", db.isOpen() ? "Yes" : "No"); // Yes
+        
+        db.resultType(sqlite.RESULTSASOBJECT);
+        
+        bInsert = (sqlstatement.indexOf("INSERT") == 0);
+        console.error("SQL WTIH CALLBACK: "+ sqlstatement);
+        db.get(sqlstatement, __resultFunction);
+
+        db.close();
+    }, function(err) {
+        console.error("We failed to open database", err);
+    });
+    */
+    
+    //db.resultType(sqlite.RESULTSASOBJECT);
         
     console.error("SQL WTIH CALLBACK: "+ sqlstatement);
+    //    db.get(sqlstatement, __resultFunction);
 
     
 };
@@ -132,13 +151,6 @@ function gotoView (i_args) {
     // CREATE required table
     module.exports.startForm();
 
-    // set globals
-    if (view === "details") {
-        
-    } else {
-        
-    }
-
     // set current view and action
     appSettings.setString("currentView", view);
     appSettings.setString("currentAction", viewAction);
@@ -167,7 +179,7 @@ function saveForm (i_this) {
     for (var i=0; i<items.length; i++) {
         formId = items[i].id;
         formItem = this.get(formId);
-        console.error(formId +" "+ formItem);
+        console.error(formId +" ++ "+ formItem);
     
         // replace properties in the view
         if (this[formId] !== undefined) {
@@ -217,11 +229,13 @@ function loadForm (i_this) {
     
     var currentAction = appSettings.getString("currentAction");
     if (currentAction == "edit") {
+    
         var currentView = appSettings.getString("currentView");
+        var viewid = appSettings.getString(currentView+"id")    
         var sqlAction = config[currentView].select;
-        sqlAction = sqlAction + "WHERE id="+1;
-        //todo: fix 1
-        console.error(sqlAction);
+        sqlAction = sqlAction + " WHERE id=" + viewid; //1;
+        
+        console.error("\\\\\ "+sqlAction);
 
         _this = i_this ? i_this : this;
         module.exports.SQL(sqlAction, _populate);
@@ -261,6 +275,15 @@ function appData(i_bType, i_sData, i_sValue, i_oOptions) {
     }
 }
 
+function setup() {
+    
+    SQL(config.user.create);
+    SQL(config.projects.create);
+    SQL(config.clients.create);
+    SQL(config.changes.create);
+    
+}
+
 module.exports = {};
 module.exports.SQL = SQL;
 module.exports.gotoView = gotoView;
@@ -269,3 +292,4 @@ module.exports.startForm = startForm;
 module.exports.loadForm = loadForm;
 module.exports.createSQL = createSQL;
 module.exports.appData = appData;
+module.exports.setup = setup;

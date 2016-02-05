@@ -1,12 +1,13 @@
 <Page loaded="loaded">
 
     <Page.actionBar>
-        <ActionBar title="JobFlow">
+        <ActionBar title="JobFlow" cssClass="custom-actionbar">
             <ActionBar.actionItems>
                 <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
                 <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
-                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="+" id="projects-new" tap="gotoView" ios.position="right" />
+                <ActionItem text="Client" id="clients-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="Project" id="projects-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="changes-new" tap="gotoView" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>

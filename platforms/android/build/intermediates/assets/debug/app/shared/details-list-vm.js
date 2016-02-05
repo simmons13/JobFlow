@@ -9,32 +9,9 @@ function DetailsListViewModel(items) {
 
     viewModel.load = function() {
 
-        //var currentView = appSettings.getString("currentView");
-        /*
-        var sqlAction = config.details.select;
-        var items = config.details.properties;
-
-        for (var i=0; i<items.length; i++) {
-            var formId = items[i].id;
-            var formItem = this.get(formId);
-            console.error(formId +" "+ formItem);
-
-            if (this[formId] !== undefined) {
-                sqlAction = sqlAction.replace("&"+ formId +"&", formItem);
-            }
-            /*else if (current[sID]) {
-                sqlAction = sqlAction.replace("&"+ sID +"&",current[sID]);
-            }*/
-       // }
-
-
-        //console.error(">> "+sqlAction);
-        // var sqlAction = scripts.createSQL("details");
-
         var sqlAction = config["details"].select;// + appSettings.getString("projects");
         var items = config["details"].properties;
         var formId, formItem, viewId;
-        //var _this = i_this ? i_this : this;
 
         // go through properties to update SQL
         for (var i=0; i<items.length; i++) {
@@ -48,7 +25,8 @@ function DetailsListViewModel(items) {
             }
 
             // replace app id stored
-            viewId = appSettings.getString(formId + "id") || "";
+            viewId = appSettings.getString(formId) || "";
+            console.error("*******" +formId +"---"+viewId+"*******" );
             if (viewId !== "") {
                 sqlAction = sqlAction.replace("&"+ formId +"&", viewId);
             }
@@ -62,12 +40,14 @@ function DetailsListViewModel(items) {
 
             var obj;
             if (i_result) {
-                console.error("#### "+i_result.pid +": "+i_result.psummary);
+                console.error("#### "+i_result.projectsid +": "+i_result.projectssummary);
                 viewModel.push({
-                    id: i_result.pid,
-                    summary: i_result.psummary,
-                    change: i_result.csummary,
-                    status: config.status[i_result.cstatus]
+                    id: i_result.projectsid,
+                    summary: i_result.projectssummary,
+                    change: i_result.changessummary,
+                    status: config.status[i_result.status],
+                    clientsid: i_result.client,
+                    projectsid: i_result.projectsid
                 });
             }
         }
@@ -79,8 +59,8 @@ function DetailsListViewModel(items) {
         }
     };
 
-    viewModel.add = function(details) {
-        viewModel.push({ summary: details, id: data.Result.Id });
+    viewModel.get = function(index) {
+        return viewModel[index];
     };
 
     viewModel.delete = function(index) {

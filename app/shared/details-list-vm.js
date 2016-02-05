@@ -44,7 +44,7 @@ function DetailsListViewModel(items) {
                 viewModel.push({
                     id: i_result.projectsid,
                     summary: i_result.projectssummary,
-                    change: i_result.changessummary,
+                    change: i_result.changessummary || "",
                     status: config.status[i_result.status],
                     clientsid: i_result.client,
                     projectsid: i_result.projectsid

@@ -99,9 +99,9 @@ module.exports.changes = {
             "project INTEGER, " +
             "status INTEGER )",
     add: "INSERT INTO changes ( "+
-            "changesid, changessummary, project, status " +
+            "changessummary, project, status " +
             ") VALUES (" + 
-            "'&changesid&', '&changessummary&', '&project&', -1" +
+            "'&changessummary&', '&project&', -1" +
             ")",
     update: "UPDATE changes SET &cond& WHERE changesid=&changesid& ",
     select: "SELECT * FROM changes t",

@@ -16,13 +16,17 @@ exports.loaded = function(i_args) {
 
 	page = i_args.object;
     
+
+    scripts.appData("string", "userid");
+    scripts.appData("number", "requests", 0, {IFNULL:1});
+    
     // clear specific IDs
     //appSettings.setString("changes","");
     //appSettings.setString("projects","");
     //appSettings.setString("clients","");
     
 	// check if user data exists, if not load user-new
-    var sqlStatement = (config.user.select).replace("&cond&","id=1");
+    var sqlStatement = (config.user.select);
     var _scripts = scripts;
     scripts.SQL(sqlStatement, _process)
     
@@ -38,6 +42,7 @@ exports.loaded = function(i_args) {
     function _process(results) {
         console.error("start process");
         if (!results) {
+            console.error("+++++ GOTO USER");
             scripts.gotoView("user");
             //exports.gotoView("user")
         } else {
@@ -49,8 +54,17 @@ exports.loaded = function(i_args) {
 
 exports.detailsItemTap = function(i_args) {
     
-    var id = i_args && i_args.view ? i_args.view.bindingContext.id : 1;
-    console.error("ITEM ID:"+id);
-    appSettings.setString("project", id+"");
+    var target = i_args.object;
+    var index = target.index;
+
+    var selected = detailsList.getItem(i_args.index);
+    console.error("~~~~~~~~~~~listView item:"+detailsList.getItem(i_args.index));
+    for (s in detailsList.getItem(i_args.index) ) {
+        console.error("~~~~~~~~~~~" + s + ":"+ detailsList.getItem(i_args.index)[s]);
+    }
+    
+    appSettings.setString("projectsid", selected.projectsid+"");
+    appSettings.setString("clientsid", selected.clientsid+"");
+    
     scripts.gotoView("projectdetails");
 }

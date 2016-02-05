@@ -8,6 +8,7 @@ var ProjectsModel = (function (_super) {
     __extends(ProjectsModel, _super);
     function ProjectsModel() {
         _super.call(this);
+        scripts.loadForm(this);
     }
 
     ProjectsModel.prototype.startForm = scripts.startForm;

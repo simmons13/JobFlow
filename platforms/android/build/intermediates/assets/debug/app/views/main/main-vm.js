@@ -26,10 +26,10 @@ var MainModel = (function (_super) {
     }
     MainModel.prototype.test = function() {
         
-        appSettings.setString("user","0");    
-        appSettings.setString("changes","0");
-        appSettings.setString("projects","0");
-        appSettings.setString("clients","0");
+        appSettings.setString("userid","1");    
+        appSettings.setString("changesid","1");
+        appSettings.setString("projectsid","1");
+        appSettings.setString("clientsid","1");
         
     }
     

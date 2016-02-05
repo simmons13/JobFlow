@@ -14,6 +14,7 @@
     <Button id="drop" text="drop" tap="{{ drop }}" />
     
     <Button id="test" text="test" tap="{{ test }}" />
+    <Button id="email" text="email" tap="{{ gotoView }}" />
     
   </StackLayout>
 </Page>

@@ -1,7 +1,4 @@
-var fetchModule = require("fetch");
-var email = require("nativescript-email");
 var observable = require("data/observable");
-var config = require("../../shared/config");
 var scripts = require("../../shared/scripts");
 
 var ChangesModel = (function (_super) {
@@ -9,6 +6,7 @@ var ChangesModel = (function (_super) {
     __extends(ChangesModel, _super);
     function ChangesModel() {
         _super.call(this);
+        scripts.loadForm(this);
     }
 
     ChangesModel.prototype.gotoView = scripts.gotoView;

@@ -1,12 +1,13 @@
 module.exports = {};
-module.exports.pushUrl = "http://staciesimmons.com/JobFlow/changeExist.php",
-module.exports.emailUrl = "http://staciesimmons.com/JobFlow/acceptChange.php",
-module.exports.projects = {
+module.exports.addChangeUrl = "http://staciesimmons.com/JobFlow/addChange.php",
+module.exports.changeExistUrl = "http://staciesimmons.com/JobFlow/changeExist.php",
+module.exports.acceptChangeUrl = "http://staciesimmons.com/JobFlow/acceptChange.php",
+module.exports.projects = { 
     stage: "projects",
     intro: "Fill out details on the project",
     properties: [
-        {id:"id", type:"key"},
-        {id:"summary", type:"textarea", title:"Enter a summary of the project"},
+        {id:"projectsid", type:"key"},
+        {id:"projectssummary", type:"textarea", title:"Enter a summary of the project"},
         {id:"client", type:"hidden"},
         {id:"orig_total", type:"text", title:"Contract total cost"},
         {id:"orig_competion_date", type:"date", title:"Contract completion date"},
@@ -15,8 +16,8 @@ module.exports.projects = {
         {id:"contract_date", type:"date", title:"Contract sign date"}
     ],
     create: "CREATE TABLE IF NOT EXISTS projects ( "+
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "summary VARCHAR(50), " +
+            "projectsid INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "projectssummary VARCHAR(50), " +
             "client INTEGER, " +
             "orig_total VARCHAR(50), " +
             "orig_competion_date VARCHAR(50), " + 
@@ -24,18 +25,18 @@ module.exports.projects = {
             "current_total VARCHAR(50), " +
             "contract_date VARCHAR(50) )",
     add: "INSERT INTO projects ( "+
-            "summary, client, orig_total, orig_competion_date, current_competion_date, current_total, contract_date" +
+            "projectssummary, client, orig_total, orig_competion_date, current_competion_date, current_total, contract_date" +
             ") VALUES (" + 
-            "'&summary&', '&client&', '&orig_total&', '&orig_competion_date&', '&current_competion_date&', '&current_total&', '&contract_date&'" +
+            "'&projectssummary&', '&client&', '&orig_total&', '&orig_competion_date&', '&current_competion_date&', '&current_total&', '&contract_date&'" +
             ")",
-    select: "SELECT * FROM projects t WHERE &cond&",
+    select: "SELECT * FROM projects t",
     goto: "projectdetails"
 };
 module.exports.user = {
     stage: "user",
     intro: "Tell us about you and your company",
     properties: [
-        {id:"id", type:"key"},
+        {id:"userid", type:"key"},
         {id:"firstname", type:"text", title:"First name"},
         {id:"lastname", type:"text", title:"Last name"},
         {id:"phone", type:"tel", title:"Phone number"},
@@ -43,25 +44,25 @@ module.exports.user = {
         {id:"companylogo", type:"file", title:"Company logo"}
     ],
     create: "CREATE TABLE IF NOT EXISTS user ( "+
-            "id INTEGER PRIMARY KEY, " +
+            "userid VARCHAR(100) PRIMARY KEY, " +
             "firstname VARCHAR(50), " +
             "lastname VARCHAR(50), " +
             "phone VARCHAR(30), " +
             "companyname VARCHAR(50), " +
             "companylogo VARCHAR(50) )",
     add: "INSERT INTO user ( "+
-            "firstname, lastname, phone, companyname, companylogo" +
+            "userid, firstname, lastname, phone, companyname, companylogo" +
             ") VALUES (" + 
-            "'&firstname&', '&lastname&', '&phone&', '&companyname&', '&companylogo&'" +
+            "'&userid&', '&firstname&', '&lastname&', '&phone&', '&companyname&', '&companylogo&'" +
             ")",
-    select: "SELECT * FROM user WHERE &cond&",
-    prepopulateCheck: "SELECT * FROM user WHERE id=1",
+    select: "SELECT * FROM user",
+    prepopulateCheck: "SELECT * FROM user WHERE userid=1",
     goto: "details"
 };
 
 module.exports.clients = {
     properties: [
-        {id:"id", type:"key"},
+        {id:"clientsid", type:"key"},
         {id:"firstname", type:"text", title:"First name"},
         {id:"lastname", type:"text", title:"Last name"},
         {id:"address", type:"text", title:"Address"},
@@ -69,7 +70,7 @@ module.exports.clients = {
         {id:"email", type:"email", title:"Email"}
     ],
     create: "CREATE TABLE IF NOT EXISTS clients ( "+
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "clientsid INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "firstname VARCHAR(50), " +
             "lastname VARCHAR(50), " +
             "address VARCHAR(100), " +
@@ -80,84 +81,79 @@ module.exports.clients = {
             ") VALUES (" + 
             "'&firstname&', '&lastname&', '&address&', '&phone&', '&email&'" +
             ")",
-    select: "SELECT * FROM clients t WHERE &cond& ",
+    select: "SELECT * FROM clients t",
     goto: "projects"
 };
 module.exports.changes = {
     stage: 'changes',
     intro: "Fill in details about the Change Order",
     properties: [
-        {id:"id", type:"key"},
-        {id:"summary", type:"textarea", title:"Enter change summary"},
+        {id:"changesid", type:"key"},
+        {id:"changessummary", type:"textarea", title:"Enter change summary"},
         {id:"status", type:"hidden"},
         {id:"project", type:"hidden"},
     ],
     create: "CREATE TABLE IF NOT EXISTS changes ( "+
-            "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            "summary VARCHAR(50), " +
+            "changesid INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "changessummary VARCHAR(50), " +
             "project INTEGER, " +
             "status INTEGER )",
     add: "INSERT INTO changes ( "+
-            "summary, project, status " +
+            "changesid, changessummary, project, status " +
             ") VALUES (" + 
-            "'&summary&', '&project&', -1" +
+            "'&changesid&', '&changessummary&', '&project&', -1" +
             ")",
-    update: "UPDATE changes ( "+
-            "summary, project " +
-            ") VALUES (" + 
-            "'&summary&', '&project&', '&status&'" +
-            ") WHERE &cond&",
-    select: "SELECT * FROM changes t WHERE &cond&",
+    update: "UPDATE changes SET &cond& WHERE changesid=&changesid& ",
+    select: "SELECT * FROM changes t",
     goto: "email"
 }; 
 module.exports.details = {
     stage: "details",
+    ids: ["userid"],
     properties: [
-        {id:"id", type:"key"},
-        {id:"summary", type:"text"},
+        {id:"projectid", type:"key"},
+        {id:"projectsummary", type:"text"},
         {id:"project", type:"hidden"},
     ],
-    select: "SELECT " +
-        "p.summary as psummary, " +
-        "p.id as pid, " +   
-        "p.client as pclient " +
-        //"c.project, " +
-        //"c.summary as csummary, " +
-        //"c.id as cid, " +
-        //"c.status as cstatus " +
-        //"p.orig_total, p.orig_competion_date, p.current_competion_date, " +
-        //"p.current_total, p.contract_date" +        
-        "FROM projects AS p " 
-        //"JOIN changes AS c " 
-        //"ON p.id=c.project "
+    select: "SELECT * " +   
+        "FROM projects " + 
+        "LEFT OUTER JOIN changes " +
+        "ON projectsid = project "
 };  
 
 module.exports.projectdetails = {
     stage: "projectdetails",
+    ids: ["userid", "projectsid", "clientsid"],
     properties: [
-        {id:"id", type:"key"},
-        {id:"summary", type:"text"},
+        {id:"projectid", type:"key"},
+        {id:"projectsummary", type:"text"},
         {id:"change", type:"text"},
     ],
-    select: "SELECT " +
-        "p.summary as psummary, " +
-        "p.id as pid, " +   
-        "p.client as pclient, " +
-        "c.id as cid, " +
-        "c.summary as csummary, " +
-        "c.status as cstatus " +
-        //"p.orig_total, p.orig_competion_date, p.current_competion_date, " +
-        //"p.current_total, p.contract_date" +        
-        "FROM projects AS p " +
-        "JOIN changes AS c " +  
-        //"ON &cond& " 
-        //"ON p.id=c.project " +
-        "WHERE &cond& AND pid = c.project"
-};  
+    select: "SELECT * " +   
+        "FROM changes " + 
+        "JOIN projects " +
+        "ON projectsid = project " +
+        "WHERE &cond&"
+};
+
+module.exports.email = {
+    stage: "email",
+    ids: ["userid", "projectsid", "clientsid", "changesid"],
+    select: "SELECT * " +   
+        "FROM changes " + 
+        "JOIN projects " +
+        "ON projectsid = project " +
+        "WHERE &cond&" +
+        "JOIN clients " +
+        "ON clientsid = client " +
+        "JOIN user " +
+        "ON userid = user"
+};
+
 
 module.exports.status = {
     "-1": "Send email",
-    "0": "Waiting response",
-    "1": "Accepted",
-    "2": "Rejected"
+     "0": "Waiting response",
+     "1": "Accepted",
+     "2": "Rejected"
 }

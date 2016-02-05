@@ -5,7 +5,8 @@ var ClientsModel = (function (_super) {
 
     __extends(ClientsModel, _super);
     function ClientsModel() {
-        _super.call(this);
+        _super.call(this);   
+        scripts.loadForm(this);
     }
 
     ClientsModel.prototype.gotoView = scripts.gotoView;

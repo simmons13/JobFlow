@@ -15,3 +15,8 @@ TextField {
 GridLayout {
     margin: 10;
 }
+
+.custom-actionbar {
+    color:white;
+    background-color: darkgray;
+}

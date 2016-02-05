@@ -14,16 +14,13 @@
     <StackLayout orientation="vertical">
 
         <Label text="Tell us details about the client" class="title"/>
-        <TextField id="firstname" text="{{ firstname }}" hint="First Name" keyboardType="text" autocorrect="false" autocapitalizationType="Words" />
-        <TextField id="lastname" text="{{ lastname }}" hint="Last Name" keyboardType="text" autocorrect="false" autocapitalizationType="Words" />
+        <TextField id="firstname" text="{{ firstname }}" hint="First Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+        <TextField id="lastname" text="{{ lastname }}" hint="Last Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
         <TextField id="phone" text="{{ phone }}" hint="Phone Number" keyboardType="phone" autocorrect="false" autocapitalizationType="none" />
         <TextField id="email" text="{{ email }}" hint="Email Address" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
         
-         <Button id="start" text="Start" tap="{{ startForm }}" />
-  <Button id="drop" text="Drop" tap="{{ drop }}" />
-    
-    <Button id="save" text="Save" tap="{{ saveForm }}" />
-    <Button id="load" text="Load" tap="{{ loadForm }}" />
+        <Button id="drop" text="Drop" tap="{{ drop }}" />
+        <Button id="save" text="Save" tap="{{ saveForm }}" />
     
     </StackLayout>
 </Page>

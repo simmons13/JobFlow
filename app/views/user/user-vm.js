@@ -1,5 +1,4 @@
 var observable = require("data/observable");
-var config = require("../../shared/config");
 var scripts = require("../../shared/scripts");
 
 var UserModel = (function (_super) {
@@ -7,7 +6,6 @@ var UserModel = (function (_super) {
     __extends(UserModel, _super);
     function UserModel() {
         _super.call(this);
-        scripts.startForm();
         scripts.loadForm(this);
     }
     

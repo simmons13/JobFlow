@@ -3,14 +3,14 @@ var config = require("./config");
 var ObservableArray = require("data/observable-array").ObservableArray;
 var appSettings = require("application-settings");
 
-function DetailsListViewModel(items) {
+function ProjectsDetailsListViewModel(items) {
     var viewModel = new ObservableArray(items);
 
     viewModel.load = function() {
         
         // check if uer data exists, if not load user request
-        var projectid = appSettings.getString("projects");
-        var sqlAction = (config.projectdetails.select).replace("&cond&","p.id =" + projectid);
+        var projectid = appSettings.getString("projectsid");
+        var sqlAction = (config.projectdetails.select).replace("&cond&","projectsid =" + projectid);
         var items = config["projectdetails"].properties;
                 
         scripts.SQL(sqlAction, _populate);
@@ -21,11 +21,13 @@ function DetailsListViewModel(items) {
         
             var obj;
             if (i_result) {
-                console.error("#### "+i_result.pid +": "+i_result.psummary);
+                console.error("#### "+i_result.projectsid +": "+i_result.projectssummary);
                 viewModel.push({
-                    id: i_result.cid,
-                    summary: i_result.psummary,
-                    change: i_result.csummary
+                    id: i_result.projectsid,
+                    summary: i_result.projectssummary,
+                    change: i_result.changessummary,
+                    status: config.status[i_result.status],
+                    changesid: i_result.changesid
                 });
             }
         }
@@ -57,4 +59,4 @@ function handleErrors(response) {
     return response;
 }
 
-module.exports = DetailsListViewModel;
+module.exports = ProjectsDetailsListViewModel;

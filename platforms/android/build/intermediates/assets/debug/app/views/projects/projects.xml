@@ -14,19 +14,16 @@
   <StackLayout  orientation="vertical">
   
     <Label text="Fill out details on the project" class="title"/>
-    <TextField id="summary" text="{{ summary }}" hint="Project summary" keyboardType="text" autocorrect="true" autocapitalizationType="Sentences" />
+    <TextField id="projectssummary" text="{{ projectssummary }}" hint="Project summary" keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
     <TextField id="orig_total" text="{{ orig_total }}" hint="Original Total Cost" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
     <TextField id="orig_competion_date" text="{{ orig_competion_date }}" hint="Original Completion Date" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
     <TextField id="contract_date" text="{{ contract_date }}" hint="Date of Contract" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
-    <TextField id="client" text="{{ client }}" hint="Client" keyboardType="number" autocorrect="false" autocapitalizationType="none" />
+    <!-- TextView tap="{{ tap }}" id="client" text="{{ client }}" editable="false" hint="Click to add client" keyboardType="text" autocorrect="false" autocapitalizationType="none" /-->
+    <Label id="client" text="Click to add client" tap="{{ tap }}"  />
     <!--DatePicker day="15" month="5" year="2015" verticalAlignment="center" horizontalAlignment="center"/-->
         
-    <Button id="start" text="Start" tap="{{ startForm }}" />
-  <Button id="drop" text="Drop" tap="{{ drop }}" />
-    
+    <Button id="drop" text="Drop" tap="{{ drop }}" />
     <Button id="save" text="Save" tap="{{ saveForm }}" />
-    <Button id="load" text="Load" tap="{{ loadForm }}" />
-    <Button id="main" text="Discard" tap="{{ gotoView }}" />
      
   </StackLayout>
 </Page>

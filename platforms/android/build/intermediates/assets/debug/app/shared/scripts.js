@@ -1,11 +1,13 @@
+var platform = require('platform');
 var appSettings = require("application-settings");
 var sqlite = require("nativescript-sqlite");
 var frameModule = require("ui/frame");
 var config = require("./config");
 
-function SQL(sqlstatement, callback){
+function SQL(sqlstatement, callback, options){
 
     var bInsert = false;
+    /*
     function __storeID(i_results) {
         console.error("ID RESULT: "+ i_results);
         var id = i_results ? i_results["LAST_INSERT_ROWID()"] : null;
@@ -19,6 +21,7 @@ function SQL(sqlstatement, callback){
         bInsert = false;
         module.exports.SQL("SELECT LAST_INSERT_ROWID()",__storeID);
     }
+    */
 
     function __resultFunction(i_results) {
         console.error("SQL RESULT all: "+ i_results);
@@ -39,9 +42,11 @@ function SQL(sqlstatement, callback){
         if (callback) {
             callback(i_results);
         }
+        /*
         if (bInsert) {
             __getID();
         }
+        */
     }
 
     var db = null;
@@ -57,18 +62,27 @@ function SQL(sqlstatement, callback){
             bInsert = (sqlstatement.indexOf("INSERT") == 0);
     
             db.resultType(sqlite.RESULTSASOBJECT);    
-            var promise = db.each(sqlstatement, [], 
-                function (err, row) {
-                    console.log("ROW:", row); // Prints ["Row x Field_1", "Row x Field 2"...] for each row passed to it
-                    __resultFunction(row);
-                }
-            );
-            promise.then(function (count) {
-                console.log("#ROWS:", count); // Prints 100  (Assuming their are a 100 rows found)
-                if (count === 0) {
-                    __resultFunction();
-                }
-            });
+            if (options && options.ALL) {
+                var promise = db.all(sqlstatement, [], 
+                    function(err, resultSet) {
+                        console.log("ALL:", resultSet);
+                         __resultFunction(resultSet);
+                    }
+                );
+            } else {
+                var promise = db.each(sqlstatement, [], 
+                    function (err, row) {
+                        console.log("ROW:", row); // Prints ["Row x Field_1", "Row x Field 2"...] for each row passed to it
+                        __resultFunction(row);
+                    }
+                );
+                promise.then(function (count) {
+                    console.log("#ROWS:", count); // Prints 100  (Assuming their are a 100 rows found)
+                    if (count === 0) {
+                        __resultFunction();
+                    }
+                });
+            }
         }
     });
 
@@ -137,16 +151,25 @@ function gotoView (i_args) {
     // CREATE required table
     module.exports.startForm();
 
+    // set globals
+    if (view === "details") {
+        
+    } else {
+        
+    }
+
+    // set current view and action
     appSettings.setString("currentView", view);
     appSettings.setString("currentAction", viewAction);
 
+    console.error("====GOTO VIEW:" + view + ":" + viewAction);
+    console.error("========USER ID:" + appSettings.getString("userid"));
+    console.error("========PROJECT ID:" + appSettings.getString("projectsid"));
+    console.error("========CHANGES ID:" + appSettings.getString("changesid"));
+    console.error("========CLIENTS ID:" + appSettings.getString("clientsid"));
+    
     frameModule.topmost().navigate("views/"+ view +"/"+ view);
 
-    console.error("GOTO VIEW:" + view + ":" + viewAction);
-    console.error("USER ID:" + appSettings.getString("user"));
-    console.error("PROJECT ID:" + appSettings.getString("projects"));
-    console.error("CHANGES ID:" + appSettings.getString("changes"));
-    console.error("CLIENTS ID:" + appSettings.getString("clients"));
 
 };
 
@@ -177,6 +200,12 @@ function saveForm (i_this) {
         } 
     }
     
+    if (currentView=="user") {
+        var uuid = platform.device.uuid;
+        sqlAction = sqlAction.replace("&userid&", uuid);
+        console.log(uuid); 
+    }
+    
     
     console.error("SAVEFORM: "+sqlAction);
     module.exports.SQL(sqlAction, _gotoNext);
@@ -194,6 +223,7 @@ function saveForm (i_this) {
 };
 
 function startForm () {
+    
     var currentView = appSettings.getString("currentView");
     var sqlstatement = config[currentView] ? config[currentView].create : "";
     if (sqlstatement) {
@@ -208,7 +238,8 @@ function loadForm (i_this) {
     if (currentAction == "edit") {
         var currentView = appSettings.getString("currentView");
         var sqlAction = config[currentView].select;
-        sqlAction = sqlAction.replace("&cond&", "id="+1 );
+        sqlAction = sqlAction + "WHERE id="+1;
+        //todo: fix 1
         console.error(sqlAction);
 
         _this = i_this ? i_this : this;
@@ -221,13 +252,42 @@ function loadForm (i_this) {
             for (var i=0; i<items.length; i++) {
                 var formId = items[i].id;
                 console.error(formId +": "+i_result[formId]);
-                if (formId !== "id") {
+                if (formId && formId.indexOf("id") == -1) {
                     _this.set(formId, i_result[formId]);
                 } 
             }
         }
     }
 };
+
+
+function appData(i_bType, i_sData, i_sValue, i_oOptions) {
+    if (i_bType === "string" ) {
+        if (i_sData=="userid") {
+            var uuid = platform.device.uuid;
+            appSettings.setString(i_sData, uuid+"");
+        }
+    
+    } else {
+       
+        if (i_oOptions && i_oOptions.IFNULL ) {
+            if (appSettings.getNumber(i_sData) == null) {
+                appSettings.setNumber(i_sData, i_sValue);
+            }
+        } else {
+            appSettings.setNumber(i_sData, i_sValue);
+        }
+    }
+}
+
+function setup() {
+    
+    SQL(config.user.create);
+    SQL(config.projects.create);
+    SQL(config.clients.create);
+    SQL(config.changes.create);
+    
+}
 
 module.exports = {};
 module.exports.SQL = SQL;
@@ -236,3 +296,5 @@ module.exports.saveForm = saveForm;
 module.exports.startForm = startForm;
 module.exports.loadForm = loadForm;
 module.exports.createSQL = createSQL;
+module.exports.appData = appData;
+module.exports.setup = setup;
