@@ -1,25 +1,46 @@
-var observable = require("data/observable");
+var Observable = require("data/observable").Observable;
 var scripts = require("../../shared/scripts");
 
-var ChangesModel = (function (_super) {
-
-    __extends(ChangesModel, _super);
-    function ChangesModel() {
-        _super.call(this);
-        scripts.loadForm(this);
-    }
-
-    ChangesModel.prototype.gotoView = scripts.gotoView;
-    ChangesModel.prototype.loadForm = scripts.loadForm;
-    ChangesModel.prototype.saveForm = scripts.saveForm;
-    ChangesModel.prototype.startForm = scripts.startForm;
-    ChangesModel.prototype.drop = function() {
-        scripts.SQL("DROP TABLE changes");
-    }
+function Changes() {
     
-    return ChangesModel;
+    var _viewModel = new Observable({});
+    var viewModel = _viewModel;
 
-})(observable.Observable);
+    viewModel.load = function(i_object) {
+        viewModel.changessummary = i_object ? i_object.changessummary || "" : "";
+        viewModel.project = i_object ? i_object.project || "" : "";
+        viewModel.changes_total = i_object ? i_object.changes_total || "" : "";
+        viewModel.changes_competion_date = i_object ? i_object.changes_competion_date || "" : "";
+    
+        viewModel.changecost = false;
+        viewModel.changedate = false;   
+        viewModel.changecostdirection = "increase";   
+        viewModel.changedatedirection = "increase";
+        
+    };
+   
+    viewModel.startForm = scripts.startForm;
+    viewModel.loadForm = scripts.loadForm;
+    viewModel.gotoView = scripts.gotoView;
+    viewModel.saveForm = scripts.saveForm;
+    viewModel.drop = function() {
+        scripts.SQL("DROP TABLE changes");
+    };
+    
+    
+    /*
+    viewModel.changeCostDirection = function(args) {
+        console.error(viewModel.changecostdirection);
+        this.changecostdirection = viewModel.changecostdirection === "increase" ? "decrease" : "increase";
+    };
+    
+     viewModel.changeDateDirection = function(args) {
+        console.error(viewModel.changedatedirection);
+        this.changedatedirection = viewModel.changedatedirection === "increase" ? "decrease" : "increase";
+    };*/
 
-exports.ChangesModel = ChangesModel;
-exports.changesViewModel = new ChangesModel();
+    return viewModel;
+}
+
+module.exports = Changes;
+

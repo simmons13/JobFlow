@@ -14,3 +14,9 @@ TextField {
 .link {
     border-width: 0;
 }
+
+.custom-actionbar {
+    background-image: url('res://logo');
+    background-size: cover;
+    background-repeat: no-repeat;
+}

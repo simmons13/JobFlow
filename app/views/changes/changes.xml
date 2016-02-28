@@ -1,24 +1,58 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   
     <Page.actionBar>
-        <ActionBar title="JobFlow">
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
             <ActionBar.actionItems>
-                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
-                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
-                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="+" id="projects" tap="gotoView" ios.position="right" />
+                <ActionItem text="save" tap="{{ saveForm }}" ios.position="right" />
+                <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
   
-  <StackLayout orientation="vertical">
-    
-    <Label text="Fill in details about the Change Order" class="title"/>
-    <TextField id="changessummary" text="{{ changessummary }}" hint="Change Summary" keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
-    <TextField id="project" text="{{ project }}" hint="project id" keyboardType="text" autocorrect="true" autocapitalizationType="none" />
-    
-    <Button id="save" text="Save" tap="{{ saveForm }}" />
-    <Button id="drop" text="Drop" tap="{{ drop }}" />
-    
-  </StackLayout>
+    <ScrollView> 
+     <GridLayout columns="40, 90, 50, 1, 30, 50, *" rows="*, *, *, *, *, *, *"  >
+        
+        <Label row="0" col="0" colSpan="7" text="Fill out details on the Change Order" class="title"  textWrap="true"/>
+        <Label row="0" col="0" colSpan="7" class="hide"  textWrap="true">
+            <Span text="Click send to email a copy of the Change Order to the client " class="textfield_label"  />
+            <Span text="or" class="textfield_label"  />
+            <Span text="Click test to send a copy to your email for review" class="textfield_label"  />
+        </Label>
+        
+        
+        <Label row="1" col="0" colSpan="7" class="textfield_label" >
+            <Span text="Change summary: " class="textfield_label" />
+        </Label>
+        <TextField row="2" col="0" colSpan="7" id="changessummary" text="{{ changessummary }}" 
+            keyboardType="text" autocorrect="true" autocapitalizationType="sentences" textWrap="true" />
+        
+        <Label row="3" col="0" colSpan="6" class="textfield_label"  textWrap="true" tap="test">
+            <Span text="Will this change " class="textfield_label"  />
+            <Span text="{{ changecostdirection }}" fontAttributes="Bold" class="textfield_label"  />
+            <Span text=" the completion cost:" class="textfield_label"  />
+        </Label>
+        <Switch row="3" col="6" checked="{{ changecost }}" />
+        
+        <Label row="4" col="1" colSpan="2" text="Change cost:" class="{{ changecost ? 'textfield_label' : 'hide' }}" />
+        <Label row="4" col="2" text=" $ " class="{{ changecost ? 'textfield_label' : 'hide' }}" style="text-align:right;" />
+        <TextField row="4" col="4" colSpan="2" id="changes_total" text="{{ changes_total }}" keyboardType="text" autocorrect="true" 
+            autocapitalizationType="sentences" class="{{ changecost ? 'textfield_value' : 'hide' }}" hint="0.00" />
+        
+        <Label row="5" col="0" colSpan="6" class="textfield_label"  textWrap="true" tap="test">
+            <Span text="Will this change " class="textfield_label" />
+            <Span text="{{ changedatedirection }}" fontAttributes="Bold" class="textfield_label" />
+            <Span text=" the completion date:" class="textfield_label"  /> 
+        </Label>
+        <Switch row="5" col="6" checked="{{ changedate }}" />
+        
+        <Label row="6" col="1" colSpan="2" text="{{ '# Days ' + changedatedirection + ':' }}" 
+            class="{{ changedate ? 'textfield_label' : 'hide' }}"  />
+        <TextField row="6" col="4" colSpan="2" id="changes_competion_date" text="{{ changes_competion_date }}" 
+            keyboardType="text" autocorrect="true" autocapitalizationType="sentences" 
+            class="{{ changedate ? 'textfield_value' : 'hide' }}" hint="0.00" />
+            
+        
+    </GridLayout>
+  </ScrollView>
+
 </Page>

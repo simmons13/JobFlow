@@ -1,25 +1,31 @@
 <Page loaded="loaded">
 
     <Page.actionBar>
-        <ActionBar title="JobFlow" cssClass="custom-actionbar">
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
             <ActionBar.actionItems>
                 <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
-                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
+                <ActionItem text="Main" id="main" tap="gotoView`" ios.position="right" />
                 <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
                 <ActionItem text="+" id="projects-new" tap="gotoView" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
     
-    <GridLayout>
-        <ListView items="{{ detailsList }}" id="detailsList" itemTap="detailsItemTap">
+
+    <GridLayout columns="*" rows="*, auto">
+        <ListView itemLoading="listViewItemLoading" items="{{ detailsList }}" id="detailsList" itemTap="detailsItemTap">
             <ListView.itemTemplate>
-                <GridLayout columns="10, *, *" rows="*, *">
-                    <Label text="{{ summary }}" horizontalAlignment="left" verticalAlignment="center" row="0" colSpan="3" />
-                    <Label text="{{ change }}" horizontalAlignment="left" verticalAlignment="center" row="1" col="1"/>
-                    <Label text="{{ status }}" horizontalAlignment="right" verticalAlignment="center" row="1" col="2"/>
+                <GridLayout columns="10, *, *" rows="1, auto, *, *, *" colSpan="1" >
+                    <Label row="0" col="0" colSpan="3" text=" " class="{{ !isChild ? 'child' : '' }}"  />
+                    <Label row="1" col="0" colSpan="3" text="{{ summary }}" class="{{ isChild ? 'hide' : 'head' }}"  />
+                    <Label row="2" col="1" text="{{ change }}" horizontalAlignment="left" verticalAlignment="center" class="{{ noChanges ? 'hide' : 'show' }}"/>
+                    <Label row="2" col="2" text="{{ status }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center" class="{{ noChanges ? 'hide' : 'show' }}"/>
+                    
+                    <Label row="3" col="1" colSpan="2" text="click to add change orders" class="{{ !noChanges ? 'hide' : 'show' }}" />
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
+        <Label row="1" text="add projects to start" id="noProjects" class="hide" />
     </GridLayout>
+
 </Page>

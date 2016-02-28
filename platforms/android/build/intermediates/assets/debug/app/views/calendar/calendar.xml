@@ -1,5 +1,6 @@
 <Page xmlns:rc="nativescript-telerik-ui/calendar" loaded="onPageLoaded" xmlns="http://www.nativescript.org/tns.xsd">
-	<GridLayout orientation="vertical" rows="auto, *, auto">
+	
+    <GridLayout orientation="vertical" rows="auto, *, auto">
         <Label text="ViewMode setting" cssClass="example-header"/>
         <rc:RadCalendar id="calendar" 
 			viewMode="{{ ViewMode }}"

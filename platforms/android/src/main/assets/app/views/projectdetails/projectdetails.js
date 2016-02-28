@@ -7,6 +7,7 @@ var page;
 
 var detailsList = new ProjectDetailsListViewModel([]);
 var pageData = new Observable({
+    projectssummary: "",
     detailsList: detailsList,
     details: ""
 });
@@ -14,20 +15,40 @@ var pageData = new Observable({
 exports.gotoView = scripts.gotoView;
 exports.loaded = function(i_args) {
        
+    console.error(1);
     page = i_args.object;
-
-    // clear specific IDs
-    //app.setString("changes","");
     
-	// load project details
-    var listView = page.getViewById("detailsList");
-    page.bindingContext = pageData;
-    detailsList.empty();
-    detailsList.load();
-    listView.animate({
-        opacity: 1,
-        duration: 1000
-    });
+    // check if uer data exists, if not load user request
+    var projectid = appSettings.getString("projectsid");
+    var sqlAction = (config.projectdetails.select).replace("&cond&","projectsid =" + projectid);
+    
+    console.error(sqlAction);        
+    scripts.SQL(sqlAction, _populate);
+    
+    function _populate(i_result) {
+        console.error("POPULATE: "+ i_result);
+    
+        if (i_result) {
+            pageData.projectssummary = i_result.projectssummary || "-";
+            
+            pageData.current_total = i_result.current_total ? "$"+i_result.current_total : "-";
+            pageData.current_competion_date = i_result.current_competion_date ? i_result.current_competion_date : "-";
+            pageData.orig_total = i_result.orig_total ? "$"+i_result.orig_total : "-";
+            pageData.orig_competion_date = i_result.orig_competion_date ? i_result.orig_competion_date : "-";
+        
+        }
+    
+        // load project details
+        var listView = page.getViewById("detailsList");
+        page.bindingContext = pageData;
+        detailsList.empty();
+        detailsList.load();
+        
+        listView.animate({
+            opacity: 1,
+            duration: 1000
+        });
+    }
      
 }
 

@@ -12,7 +12,8 @@ function ProjectsDetailsListViewModel(items) {
         var projectid = appSettings.getString("projectsid");
         var sqlAction = (config.projectdetails.select).replace("&cond&","projectsid =" + projectid);
         var items = config["projectdetails"].properties;
-                
+        
+        console.error(sqlAction);        
         scripts.SQL(sqlAction, _populate);
         
                                    
@@ -25,8 +26,9 @@ function ProjectsDetailsListViewModel(items) {
                 viewModel.push({
                     id: i_result.projectsid,
                     summary: i_result.projectssummary,
-                    change: i_result.changessummary,
+                    change: i_result.changessummary || "",
                     status: config.status[i_result.status],
+                    statuscss: config.statuscss[i_result.status],
                     changesid: i_result.changesid
                 });
             }

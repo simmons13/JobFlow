@@ -2,7 +2,7 @@ module.exports = {};
 module.exports.addChangeUrl = "http://staciesimmons.com/JobFlow/addChange.php",
 module.exports.changeExistUrl = "http://staciesimmons.com/JobFlow/changeExist.php",
 module.exports.acceptChangeUrl = "http://staciesimmons.com/JobFlow/acceptChange.php",
-module.exports.projects = { 
+module.exports.projects = {
     stage: "projects",
     intro: "Fill out details on the project",
     properties: [
@@ -20,16 +20,18 @@ module.exports.projects = {
             "projectssummary VARCHAR(50), " +
             "client INTEGER, " +
             "orig_total VARCHAR(50), " +
-            "orig_competion_date VARCHAR(50), " + 
-            "current_competion_date VARCHAR(50), " + 
+            "orig_competion_date VARCHAR(50), " +
+            "current_competion_date VARCHAR(50), " +
             "current_total VARCHAR(50), " +
             "contract_date VARCHAR(50) )",
     add: "INSERT INTO projects ( "+
             "projectssummary, client, orig_total, orig_competion_date, current_competion_date, current_total, contract_date" +
-            ") VALUES (" + 
+            ") VALUES (" +
             "'&projectssummary&', '&client&', '&orig_total&', '&orig_competion_date&', '&current_competion_date&', '&current_total&', '&contract_date&'" +
             ")",
-    select: "SELECT * FROM projects t",
+    select: "SELECT * FROM projects " +
+            "INNER JOIN clients " +
+            "ON clientsid = client ",
     goto: "projectdetails"
 };
 module.exports.user = {
@@ -37,23 +39,23 @@ module.exports.user = {
     intro: "Tell us about you and your company",
     properties: [
         {id:"userid", type:"key"},
-        {id:"firstname", type:"text", title:"First name"},
-        {id:"lastname", type:"text", title:"Last name"},
-        {id:"phone", type:"tel", title:"Phone number"},
-        {id:"companyname", type:"text", title:"Company name"},
-        {id:"companylogo", type:"file", title:"Company logo"}
+        {id:"userfirstname", type:"text", title:"First name"},
+        {id:"userlastname", type:"text", title:"Last name"},
+        {id:"userphone", type:"tel", title:"Phone number"},
+        {id:"usercompanyname", type:"text", title:"Company name"},
+        {id:"usercompanylogo", type:"file", title:"Company logo"}
     ],
     create: "CREATE TABLE IF NOT EXISTS user ( "+
             "userid VARCHAR(100) PRIMARY KEY, " +
-            "firstname VARCHAR(50), " +
-            "lastname VARCHAR(50), " +
-            "phone VARCHAR(30), " +
-            "companyname VARCHAR(50), " +
-            "companylogo VARCHAR(50) )",
+            "userfirstname VARCHAR(50), " +
+            "userlastname VARCHAR(50), " +
+            "userphone VARCHAR(30), " +
+            "usercompanyname VARCHAR(50), " +
+            "usercompanylogo VARCHAR(50) )",
     add: "INSERT INTO user ( "+
-            "userid, firstname, lastname, phone, companyname, companylogo" +
-            ") VALUES (" + 
-            "'&userid&', '&firstname&', '&lastname&', '&phone&', '&companyname&', '&companylogo&'" +
+            "userid, userfirstname, userlastname, userphone, usercompanyname, usercompanylogo" +
+            ") VALUES (" +
+            "'&userid&', '&userfirstname&', '&userlastname&', '&userphone&', '&usercompanyname&', '&usercompanylogo&'" +
             ")",
     select: "SELECT * FROM user",
     prepopulateCheck: "SELECT * FROM user WHERE userid=1",
@@ -78,10 +80,10 @@ module.exports.clients = {
             "email VARCHAR(100) )",
     add: "INSERT INTO clients ( "+
             "firstname, lastname, address, phone, email" +
-            ") VALUES (" + 
+            ") VALUES (" +
             "'&firstname&', '&lastname&', '&address&', '&phone&', '&email&'" +
             ")",
-    select: "SELECT * FROM clients t",
+    select: "SELECT * FROM clients t ",
     goto: "projects"
 };
 module.exports.changes = {
@@ -99,14 +101,14 @@ module.exports.changes = {
             "project INTEGER, " +
             "status INTEGER )",
     add: "INSERT INTO changes ( "+
-            "changesid, changessummary, project, status " +
-            ") VALUES (" + 
-            "'&changesid&', '&changessummary&', '&project&', -1" +
+            "changessummary, project, status " +
+            ") VALUES (" +
+            "'&changessummary&', '&project&', -1" +
             ")",
     update: "UPDATE changes SET &cond& WHERE changesid=&changesid& ",
     select: "SELECT * FROM changes t",
     goto: "email"
-}; 
+};
 module.exports.details = {
     stage: "details",
     ids: ["userid"],
@@ -115,11 +117,11 @@ module.exports.details = {
         {id:"projectsummary", type:"text"},
         {id:"project", type:"hidden"},
     ],
-    select: "SELECT * " +   
-        "FROM projects " + 
-        "LEFT OUTER JOIN changes " +
+    select: "SELECT * " +
+        "FROM projects " +
+        "LEFT JOIN changes " +
         "ON projectsid = project "
-};  
+};
 
 module.exports.projectdetails = {
     stage: "projectdetails",
@@ -129,9 +131,9 @@ module.exports.projectdetails = {
         {id:"projectsummary", type:"text"},
         {id:"change", type:"text"},
     ],
-    select: "SELECT * " +   
-        "FROM changes " + 
-        "JOIN projects " +
+    select: "SELECT * " +
+        "FROM projects " +
+        "LEFT JOIN changes " +
         "ON projectsid = project " +
         "WHERE &cond&"
 };
@@ -139,15 +141,15 @@ module.exports.projectdetails = {
 module.exports.email = {
     stage: "email",
     ids: ["userid", "projectsid", "clientsid", "changesid"],
-    select: "SELECT * " +   
-        "FROM changes " + 
-        "JOIN projects " +
+    select: "SELECT * " +
+        "FROM changes " +
+        "INNER JOIN projects " +
         "ON projectsid = project " +
-        "WHERE &cond&" +
-        "JOIN clients " +
+        "INNER JOIN clients " +
         "ON clientsid = client " +
-        "JOIN user " +
-        "ON userid = user"
+        "CROSS JOIN user " +
+        "WHERE &cond& " 
+        
 };
 
 
@@ -156,4 +158,11 @@ module.exports.status = {
      "0": "Waiting response",
      "1": "Accepted",
      "2": "Rejected"
+}
+
+module.exports.statuscss = {
+    "-1": "send",
+     "0": "waiting",
+     "1": "accepted",
+     "2": "rejected"
 }

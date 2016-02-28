@@ -1,23 +1,24 @@
 <Page loaded="loaded">
 
     <Page.actionBar>
-        <ActionBar title="JobFlow">
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
             <ActionBar.actionItems>
-                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
                 <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
-                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="+" id="projects-new" tap="gotoView" ios.position="right" />
+                <ActionItem text="Client" id="clients-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="Project" id="projects-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="changes-new" tap="gotoView" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
     
-    <GridLayout>
-        <ListView items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap">
+    <GridLayout columns="*" rows="auto,*">
+        <Label text="{{ projectssummary }}" class="head" horizontalAlignment="left" verticalAlignment="center" row="0" col="0"/>
+        <ListView items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap" row="1" col="0">
             <ListView.itemTemplate>
-                <GridLayout columns="10, *, *" rows="*, *">
-                    <Label text="{{ projectssummary }}" horizontalAlignment="left" verticalAlignment="center" row="0" colSpan="3" />
-                    <Label text="{{ change }}" horizontalAlignment="left" verticalAlignment="center" row="1" col="1"/>
-                    <Label text="{{ status }}" horizontalAlignment="right" verticalAlignment="center" row="1" col="2"/>
+                <!-- Label text="{{ projectssummary }}" horizontalAlignment="left" verticalAlignment="center"  /-->
+                <GridLayout columns="10, *, *" rows="*">
+                    <Label text="{{ change }}" horizontalAlignment="left" verticalAlignment="center" row="0" col="1"/>
+                    <Label text="{{ status }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center" row="0" col="2"/>
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>

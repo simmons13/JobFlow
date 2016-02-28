@@ -1,22 +1,18 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   
     <Page.actionBar>
-        <ActionBar title="JobFlow">
+        <ActionBar title=" " tap="gotoView"  cssClass="custom-actionbar">
             <ActionBar.actionItems>
-                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
-                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
-                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="+" id="projects" tap="gotoView" ios.position="right" />
+                <ActionItem id="projectdetails" text="back" tap="{{ gotoView }}" ios.position="right" />
+                <ActionItem text="Change" id="change-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
   
   <StackLayout orientation="vertical">
-    
-    <Label text="The following will be sent to your client" class="title"/>
-    <TextField id="email" text="{{ email }}" keyboardType="text" autocorrect="true" autocapitalizationType="none" />
-         
-    <Button id="sendorder" text="Send" tap="{{ sendOrder }}" />
-    
+    <Label text="Preview and email a copy of the Change Order to the client" class="title"  textWrap="true"/>
+    <Button text="Email" tap="{{ sendOrder }}" />
   </StackLayout>
+  
 </Page>

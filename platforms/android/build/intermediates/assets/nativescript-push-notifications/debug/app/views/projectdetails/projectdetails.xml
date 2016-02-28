@@ -1,0 +1,31 @@
+
+<Page loaded="loaded">
+
+    <Page.actionBar>
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
+            <ActionBar.actionItems>
+                <ActionItem text="Client" id="clients-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="Project" id="projects-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="changes-new" tap="gotoView" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    
+    <GridLayout columns="*" rows="auto,*,*">
+        <Label row="0" col="0" text="{{ projectssummary }}" class="head" horizontalAlignment="left" verticalAlignment="center" />
+        <ListView  row="1" col="0" items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap">
+            <ListView.itemTemplate>
+                <GridLayout columns="5, *, 70, 90, 100" rows="*">
+                    <Label row="0" col="1" text="{{ changesummary }}" horizontalAlignment="left" verticalAlignment="center" />
+                    <Label row="0" col="2" text="{{ changes_total }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center" class="{{ noChanges ? 'hide' : 'show' }}"/>
+                    <Label row="0" col="3" text="{{ changes_competion_date }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center" class="{{ noChanges ? 'hide' : 'show' }}"/>
+                    <Label row="0" col="4" text="{{ changestatus }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <GridLayout columns="100, 50, 50, *" rows="*">
+            <Label row="0" col="1" text="{{ current_competion_date }}" horizontalAlignment="left" verticalAlignment="center" />
+            <Label row="0" col="2" text="{{ current_total }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center" />
+        </GridLayout>
+    </GridLayout>
+</Page>

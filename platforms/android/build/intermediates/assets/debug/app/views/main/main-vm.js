@@ -24,15 +24,6 @@ var MainModel = (function (_super) {
         scripts.SQL("DROP TABLE user");
         
     }
-    MainModel.prototype.test = function() {
-        
-        appSettings.setString("userid","1");    
-        appSettings.setString("changesid","1");
-        appSettings.setString("projectsid","1");
-        appSettings.setString("clientsid","1");
-        
-    }
-    
     
     return MainModel;
 })(observable.Observable);

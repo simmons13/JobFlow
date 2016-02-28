@@ -1,25 +1,28 @@
-var observable = require("data/observable");
+var Observable = require("data/observable").Observable;
 var scripts = require("../../shared/scripts");
 
-var ClientsModel = (function (_super) {
+function Clients() {
+    
+    var _viewModel = new Observable({});
+    var viewModel = _viewModel;
 
-    __extends(ClientsModel, _super);
-    function ClientsModel() {
-        _super.call(this);   
-        scripts.loadForm(this);
-    }
-
-    ClientsModel.prototype.gotoView = scripts.gotoView;
-    ClientsModel.prototype.loadForm = scripts.loadForm;
-    ClientsModel.prototype.saveForm = scripts.saveForm;
-    ClientsModel.prototype.startForm = scripts.startForm;
-    ClientsModel.prototype.drop = function() {
+    viewModel.load = function(i_object) {
+        viewModel.firstname = i_object ? i_object.firstname || "" : "";
+        viewModel.lastname = i_object ? i_object.lastname || "" : "";
+        viewModel.phone = i_object ? i_object.phone || "" : "";
+        viewModel.email = i_object ? i_object.email || "" : "";
+    };
+   
+    viewModel.startForm = scripts.startForm;
+    viewModel.loadForm = scripts.loadForm;
+    viewModel.gotoView = scripts.gotoView;
+    viewModel.saveForm = scripts.saveForm;
+    viewModel.drop = function() {
         scripts.SQL("DROP TABLE clients");
-    }
+    };
     
-    return ClientsModel;
-    
-})(observable.Observable);
+    return viewModel;
+}
 
-exports.ClientsModel = ClientsModel;
-exports.clientsViewModel = new ClientsModel();
+module.exports = Clients;
+

@@ -1,29 +1,41 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   
     <Page.actionBar>
-        <ActionBar title="JobFlow">
+        <ActionBar title=" " tap="gotoView"  cssClass="custom-actionbar">
             <ActionBar.actionItems>
-                <ActionItem text="Cal" id="calendar" tap="gotoView" ios.position="right" />
-                <ActionItem text="Main" id="main" tap="gotoView" ios.position="right" />
-                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="+" id="projects" tap="gotoView" ios.position="right" />
+                <ActionItem text="save" tap="{{ saveForm }}" ios.position="right" />
+                <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
   
-  <StackLayout  orientation="vertical">
-  
-    <Label text="Fill out details on the project" class="title"/>
-    <TextField id="projectssummary" text="{{ projectssummary }}" hint="Project summary" keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
-    <TextField id="orig_total" text="{{ orig_total }}" hint="Original Total Cost" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
-    <TextField id="orig_competion_date" text="{{ orig_competion_date }}" hint="Original Completion Date" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
-    <TextField id="contract_date" text="{{ contract_date }}" hint="Date of Contract" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
-    <!-- TextView tap="{{ tap }}" id="client" text="{{ client }}" editable="false" hint="Click to add client" keyboardType="text" autocorrect="false" autocapitalizationType="none" /-->
-    <Label id="client" text="Click to add client" tap="{{ tap }}"  />
-    <!--DatePicker day="15" month="5" year="2015" verticalAlignment="center" horizontalAlignment="center"/-->
+  <ScrollView>
+     <GridLayout columns="40, 90, 20, *" rows="*, *, *, *, *, *, *, *, *"  >
         
-    <Button id="drop" text="Drop" tap="{{ drop }}" />
-    <Button id="save" text="Save" tap="{{ saveForm }}" />
-     
-  </StackLayout>
+        <Label row="0" col="0" colSpan="4" text="Fill out details on the project" class="title"  textWrap="true"/>
+        
+        <Label row="1" col="0" colSpan="4" text="Project summary:" class="textfield_label" />
+        <TextField row="2" col="0" colSpan="4" id="projectssummary" text="{{ projectssummary }}" hint="" 
+            keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
+        
+        <Label row="3" col="0" colSpan="3" text="Project client:" class="textfield_label" />
+        <Label row="3" col="3" class="textfield" id="client" text="{{ client }}" tap="{{ tap }}" horizontalAlignment="left" />
+        
+        <Label row="4" col="0" colSpan="2" text="Total project cost:" class="textfield_label" />
+        <Label row="4" col="2" text="$ " class="textfield_dollar" />
+        <TextField row="4" col="3" id="orig_total" text="{{ orig_total }}" hint="0.00" keyboardType="Numbers" 
+            autocorrect="false" autocapitalizationType="sentences" class="textfield_value" />
+        
+        <Label row="5" col="0" colSpan="4" text="Completion date:" class="textfield_label" />
+        <DatePicker row="6" col="1" colSpan="3" day="{{ orig_competion_date_dayy }}" month="{{ orig_competion_date_month }}" 
+            year="{{ orig_competion_date_year }}" id="orig_competion_date" text="{{ orig_competion_date }}" 
+            verticalAlignment="center" horizontalAlignment="center" />
+        
+        <Label row="7" col="0" colSpan="4" text="Contract date:" class="textfield_label" /> 
+        <DatePicker row="8" col="1" colSpan="3" day="{{ contract_date_dayy }}" month="{{ contract_date_month }}" 
+            year="{{ contract_date_year }}" id="contract_date"  text="{{ contract_date }}" 
+            verticalAlignment="center" horizontalAlignment="center"  />
+    
+    </GridLayout>
+  </ScrollView>
 </Page>

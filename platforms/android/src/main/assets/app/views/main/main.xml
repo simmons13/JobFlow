@@ -1,4 +1,11 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  
+      <Page.actionBar>
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
+
+        </ActionBar>
+    </Page.actionBar>
+  
   <StackLayout  orientation="vertical">
   
     <Button id="changes" text="changes" tap="{{ gotoView }}" />
@@ -10,10 +17,7 @@
     <Button id="user" text="user" tap="{{ gotoView }}" />
     <Button id="projects" text="projects" tap="{{ gotoView }}" />
     <Button id="calendar" text="calendar" tap="{{ gotoView }}" />
-    
     <Button id="drop" text="drop" tap="{{ drop }}" />
-    
-    <Button id="test" text="test" tap="{{ test }}" />
     <Button id="email" text="email" tap="{{ gotoView }}" />
     
   </StackLayout>

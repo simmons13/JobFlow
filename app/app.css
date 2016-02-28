@@ -1,12 +1,37 @@
 ﻿@import { url('~/platform.css') };
 
 .title {
-    font-size: 30;
-    horizontal-align: center;
+    font-size: 25;
+    text-align: center;
     margin: 20;
+    
+}
+
+.textfield_label {
+    font-size: 18;
+    text-align: left;
+    margin-left: 5;
+}
+
+
+.textfield_dollar {
+    font-size: 18;
+    text-align: left;
+    margin-left: 5;
+    border-bottom: 1 black solid;
+}
+
+
+
+.textfield {
+    font-size: 18;
+    width: 200%;
+    text-align: left;
+    border-bottom: 1 black solid;
 }
 
 button {
+    margin-top: 10;
     font-size: 30;
     horizontal-align: center;
 }
@@ -15,4 +40,59 @@ button {
     font-size: 20;
     color: #284848;
     horizontal-align: center;
+}
+
+.custom-actionbar {
+    color:white;
+    background-color: #2dcc70;
+    background-color: #238b32;
+    background-color: #e3e3e3;
+}
+
+.head {
+    width: 1000%;
+    background-color: #3598db;
+    background-color: #898989;
+    background-color: #02318b;
+    background-color: #3598db;
+    color: white;
+    margin-top: 20;
+}
+
+.send {
+    color: darkslategray;
+}
+
+.waiting {
+    color: midnightblue;
+}
+
+
+.send, .waiting {
+    color: gray;
+}
+
+.accepted, .accepted_ {
+    color: forestgreen;    
+}
+
+.rejected, .rejected_ {
+    color: darkred;
+}
+
+.waiting_, .send_  {
+    color: lightgray;
+}
+
+
+.hide {
+    height: 1;
+    visibility: collapse;
+    visibility: collapsed;
+    visibility: hidden;
+}
+
+
+.test {
+    color: red;
 }

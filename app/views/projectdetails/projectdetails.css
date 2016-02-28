@@ -4,6 +4,7 @@ ListView {
 }
 Label {
     margin: 5;
+    padding: 10;
     horizontal-align: left;
     vertical-align: center;
 }
@@ -16,7 +17,9 @@ GridLayout {
     margin: 10;
 }
 
-.custom-actionbar {
-    color:white;
-    background-color: #636363;
+.subtotal {
+    width: 1000%;
+    color: #88888;
+    margin-top: 20;
+    background-color: lightgray;
 }

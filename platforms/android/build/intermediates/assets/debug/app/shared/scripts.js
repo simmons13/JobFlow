@@ -105,7 +105,7 @@ function SQL(sqlstatement, callback, options){
     
     //db.resultType(sqlite.RESULTSASOBJECT);
         
-    console.error("SQL WTIH CALLBACK: "+ sqlstatement);
+  //  console.error("SQL WTIH CALLBACK: "+ sqlstatement);
     //    db.get(sqlstatement, __resultFunction);
 
     
@@ -147,17 +147,6 @@ function gotoView (i_args) {
     var view = viewObj[0];
     var viewAction = (viewObj.length === 2) ? viewObj[1] : "";
 
-    // can run simultanious because will take time to load
-    // CREATE required table
-    module.exports.startForm();
-
-    // set globals
-    if (view === "details") {
-        
-    } else {
-        
-    }
-
     // set current view and action
     appSettings.setString("currentView", view);
     appSettings.setString("currentAction", viewAction);
@@ -169,7 +158,7 @@ function gotoView (i_args) {
     console.error("========CLIENTS ID:" + appSettings.getString("clientsid"));
     
     frameModule.topmost().navigate("views/"+ view +"/"+ view);
-
+    
 
 };
 
@@ -186,18 +175,21 @@ function saveForm (i_this) {
     for (var i=0; i<items.length; i++) {
         formId = items[i].id;
         formItem = this.get(formId);
-        console.error(formId +" "+ formItem);
+        console.error(formId +" ++ "+ formItem);
     
-        // replace properties in the view
-        if (this[formId] !== undefined) {
-            sqlAction = sqlAction.replace("&"+ formId +"&", formItem);
-        }
-        
         // replace app id stored
-        viewId = appSettings.getString(formId) || ""; 
+        viewId = appSettings.getString(formId) ||
+                 appSettings.getString(formId + "sid") || "";         
         if (viewId !== "") {
             sqlAction = sqlAction.replace("&"+ formId +"&", viewId);
         } 
+        
+        // replace properties in the view
+        if (this[formId] !== undefined) {
+            console.error(formId +" +1+ "+ formItem);
+            sqlAction = sqlAction.replace("&"+ formId +"&", formItem);
+        }
+        
     }
     
     if (currentView=="user") {
@@ -205,7 +197,10 @@ function saveForm (i_this) {
         sqlAction = sqlAction.replace("&userid&", uuid);
         console.log(uuid); 
     }
-    
+
+    if (currentView=="clients" && appSettings.getString("loadingClient")) {
+        appSettings.setString("loadingClient", this.get("firstname") +" "+ this.get("lastname"));
+    }
     
     console.error("SAVEFORM: "+sqlAction);
     module.exports.SQL(sqlAction, _gotoNext);
@@ -231,32 +226,41 @@ function startForm () {
     }
 };
 
-function loadForm (i_this) {
+function loadForm (i_this, i_model) {
     var _this;
-    
-    var currentAction = appSettings.getString("currentAction");
-    if (currentAction == "edit") {
-        var currentView = appSettings.getString("currentView");
-        var sqlAction = config[currentView].select;
-        sqlAction = sqlAction + "WHERE id="+1;
-        //todo: fix 1
-        console.error(sqlAction);
+    console.error("\\\\\ LOADD");
 
+
+    var currentAction = appSettings.getString("currentAction");
+     console.error("\\\\\ "+currentAction);
+
+    if (currentAction == "edit") {
+    
+        var currentView = appSettings.getString("currentView");
+        console.error("\\\\\ "+currentView);
+
+        var viewid = appSettings.getString(currentView+"id")    
+        console.error("\\\\\ "+viewid);
+        
+        var sqlAction = config[currentView].select;
+        sqlAction = sqlAction + " WHERE " + currentView +"id=" + viewid; //1;
+        
+        console.error("\\\\\ "+sqlAction);
+        //console.error("\\\\\ "+ this.get("projectssummary"));
+        //console.error("\\\\\ "+ i_this.get("projectssummary"));
+        
         _this = i_this ? i_this : this;
-        module.exports.SQL(sqlAction, _populate);
+        module.exports.SQL(sqlAction, _populate, {ALL:true});
+    
+    } else {
+        i_model.load();
+        
     }
 
     function _populate(i_result) {
-        if (i_result) {
-            var items = config[currentView].properties;
-            for (var i=0; i<items.length; i++) {
-                var formId = items[i].id;
-                console.error(formId +": "+i_result[formId]);
-                if (formId && formId.indexOf("id") == -1) {
-                    _this.set(formId, i_result[formId]);
-                } 
-            }
-        }
+        var model = i_result && i_result[0] ? i_result[0] : null;
+        i_model.load(model);
+        _this.bindingContext = i_model;
     }
 };
 
@@ -286,6 +290,7 @@ function setup() {
     SQL(config.projects.create);
     SQL(config.clients.create);
     SQL(config.changes.create);
+    appSettings.setString("loadingClient", "false");
     
 }
 

@@ -7,11 +7,14 @@ function DetailsListViewModel(items) {
 
     var viewModel = new ObservableArray(items);
 
+
+    var currentItems;
     viewModel.load = function() {
 
         var sqlAction = config["details"].select;// + appSettings.getString("projects");
         var items = config["details"].properties;
         var formId, formItem, viewId;
+        currentItems= {};
 
         // go through properties to update SQL
         for (var i=0; i<items.length; i++) {
@@ -31,24 +34,36 @@ function DetailsListViewModel(items) {
                 sqlAction = sqlAction.replace("&"+ formId +"&", viewId);
             }
         }
-
+        console.error("*******" + sqlAction );
+            
         scripts.SQL(sqlAction, _populate);
-
 
         function _populate(i_result) {
             console.error("POPULATE: "+ i_result);
 
-            var obj;
             if (i_result) {
+                
+                currentItems[i_result.projectsid] = currentItems[i_result.projectsid] || 0;
+                currentItems[i_result.projectsid]++;
+                
                 console.error("#### "+i_result.projectsid +": "+i_result.projectssummary);
+                console.error("#### "+ (currentItems[i_result.projectsid]));
+                console.error("#### "+ (currentItems[i_result.projectsid] == 1 && i_result.changesid == null));
+                
                 viewModel.push({
                     id: i_result.projectsid,
-                    summary: i_result.projectssummary,
-                    change: i_result.changessummary || "",
-                    status: config.status[i_result.status],
+                    projectsummary: i_result.projectssummary,
+                    changesummary: i_result.changessummary || "",
+                    changestatus: config.status[i_result.status],
+                    statuscss: config.statuscss[i_result.status],
                     clientsid: i_result.client,
-                    projectsid: i_result.projectsid
+                    projectsid: i_result.projectsid,
+                    isChild: currentItems[i_result.projectsid] > 1,
+                    noChanges: (currentItems[i_result.projectsid] == 1 && i_result.changesid == null) 
                 });
+                console.error("--"+i_result.status+":"+config.statuscss[i_result.status])
+                
+                //hide label 
             }
         }
     };

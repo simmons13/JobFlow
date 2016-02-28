@@ -1,27 +1,26 @@
-var fetchModule = require("fetch");
-var email = require("nativescript-email");
-var observable = require("data/observable");
-var config = require("../../shared/config");
+var Observable = require("data/observable").Observable;
 var scripts = require("../../shared/scripts");
 
-var ChangesModel = (function (_super) {
-
-    __extends(ChangesModel, _super);
-    function ChangesModel() {
-        _super.call(this);
-    }
-
-    ChangesModel.prototype.gotoView = scripts.gotoView;
-    ChangesModel.prototype.loadForm = scripts.loadForm;
-    ChangesModel.prototype.saveForm = scripts.saveForm;
-    ChangesModel.prototype.startForm = scripts.startForm;
-    ChangesModel.prototype.drop = function() {
-        scripts.SQL("DROP TABLE changes");
-    }
+function Changes() {
     
-    return ChangesModel;
+    var _viewModel = new Observable({});
+    var viewModel = _viewModel;
 
-})(observable.Observable);
+    viewModel.load = function(i_object) {
+        viewModel.changessummary = i_object ? i_object.changessummary || "" : "";
+        viewModel.project = i_object ? i_object.project || "" : "";
+    };
+   
+    viewModel.startForm = scripts.startForm;
+    viewModel.loadForm = scripts.loadForm;
+    viewModel.gotoView = scripts.gotoView;
+    viewModel.saveForm = scripts.saveForm;
+    viewModel.drop = function() {
+        scripts.SQL("DROP TABLE changes");
+    };
+    
+    return viewModel;
+}
 
-exports.ChangesModel = ChangesModel;
-exports.changesViewModel = new ChangesModel();
+module.exports = Changes;
+

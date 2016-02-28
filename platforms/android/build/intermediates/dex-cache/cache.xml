@@ -2,25 +2,32 @@
 <items version="2" >
 
     <item
-        jar="C:\git\native\f\JobFlow\platforms\android\libs\widgets.jar"
+        jar="C:\git\JobFlow\node_modules\nativescript-push-notifications\platforms\android\libs\pushplugin.jar"
         jumboMode="false"
-        revision="22.0.1"
+        revision="23.0.2"
+        sha1="675d57ba588768abdd43fa1f48246cc28a0e3342">
+        <dex dex="C:\git\JobFlow\platforms\android\build\intermediates\pre-dexed\nativescript-push-notifications\debug\pushplugin-d751febe4463d12fbc8f2252e7c338ce9bd39804.jar" />
+    </item>
+    <item
+        jar="C:\git\JobFlow\platforms\android\libs\widgets.jar"
+        jumboMode="false"
+        revision="23.0.2"
         sha1="ff3c62a8eb22f0111b882125ad1579dc6273fd90">
-        <dex dex="C:\git\native\f\JobFlow\platforms\android\build\intermediates\pre-dexed\debug\widgets-a0f72a636d70515f0fbf9d7553a93374a9a08f18.jar" />
+        <dex dex="C:\git\JobFlow\platforms\android\build\intermediates\pre-dexed\nativescript-push-notifications\debug\widgets-80b320f5ba0922c2c029dbc8f5854a1e950c1de1.jar" />
     </item>
     <item
-        jar="C:\Program Files (x86)\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jar="C:\git\JobFlow\platforms\android\libs\nativescript.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="C:\git\native\f\JobFlow\platforms\android\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-6afb30d34d8ee0256038e37cf43078b75d29b358.jar" />
-    </item>
-    <item
-        jar="C:\git\native\f\JobFlow\platforms\android\libs\nativescript.jar"
-        jumboMode="false"
-        revision="22.0.1"
+        revision="23.0.2"
         sha1="e49ee2301dce2f85edd44f634fd45ad92df9e00a">
-        <dex dex="C:\git\native\f\JobFlow\platforms\android\build\intermediates\pre-dexed\debug\nativescript-97743588957cdafb5439c57a52b25aea692339b4.jar" />
+        <dex dex="C:\git\JobFlow\platforms\android\build\intermediates\pre-dexed\nativescript-push-notifications\debug\nativescript-a89c1713fb7bce9696eecdebf98e104a08859f19.jar" />
+    </item>
+    <item
+        jar="C:\Program Files (x86)\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\git\JobFlow\platforms\android\build\intermediates\pre-dexed\nativescript-push-notifications\debug\support-annotations-23.1.1-6fd699aeef8bbc23a3ee27b7d45abde9e3ed1a1a.jar" />
     </item>
 
 </items>

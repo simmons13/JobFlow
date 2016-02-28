@@ -1,4 +1,5 @@
 var DetailsListViewModel = require("../../shared/details-list-vm");
+var SubDetailsListViewModel = require("../../shared/subdetails-list-vm");
 var Observable = require("data/observable").Observable;
 var appSettings = require("application-settings");
 var config = require("../../shared/config");
@@ -6,6 +7,7 @@ var scripts = require("../../shared/scripts");
 var page;
 
 var detailsList = new DetailsListViewModel([]);
+var subdetailsList = new SubDetailsListViewModel([]);
 var pageData = new Observable({
     detailsList: detailsList,
     details: ""
@@ -50,6 +52,54 @@ exports.loaded = function(i_args) {
         }
     
     }
+}
+
+exports.listViewItemLoading = function (args) {
+    /*
+    var listView= args.object;
+    console.error("LST: "+listView);
+    
+  
+    
+    var sublistView = page.getViewById("detailsList")
+    var t = sublistView.get(1)//.color="red";
+    console.error("GET1: "+ sublistView.items.length)
+    console.error("GET1: "+ sublistView.items.getItem(1))
+    console.error("GET1: "+ sublistView.items.getItem(2))
+    //sublistView.class="test";
+    //sublistView.color="red";
+    for ( s in sublistView) {
+        console.error("---"+s)
+    }
+    console.error("SUB1: "+ sublistView)
+    console.error("SUB2: "+ sublistView.text)
+    console.error("SUB3: "+ page.getViewById("detailsList"))
+    console.error("SUB4: "+ page)
+    console.error("SUB5: "+ page.getViewById("detailsSublist"))
+    console.error("SUB6: "+ listView.getViewById("detailsSublist"))
+    console.error("SUB7: "+ listView.get("detailsSublist"))
+    console.error("SUB8: "+ page.get("detailsSublist"))
+    
+    
+    var listViewBindingContent = listView.bindingContext;
+    listViewBindingContent.set("subdetailsList", subdetailsList);
+    subdetailsList.load();    
+    //sublistView.animate({
+    //    opacity: 1,
+    //    duration: 1000
+    //});
+    console.error("OBS: "+listViewBindingContent);
+    
+        var listView= args.object;
+    console.error("LST: "+listView);
+    
+    var item = args.view;
+    console.error("GRID: "+item);
+    
+    var itemBindingContext = args.view.bindingContext;
+    console.error(itemBindingContext);
+    */
+
 }
 
 exports.detailsItemTap = function(i_args) {

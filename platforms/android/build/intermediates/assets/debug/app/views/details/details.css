@@ -3,20 +3,34 @@ ListView {
     opacity: 0;
 }
 Label {
-    margin: 5;
+    padding: 5;
     horizontal-align: left;
     vertical-align: center;
 }
 TextField {
-    border-width: 5;
-    border-style: solid;
-    border-color: #034793;
-}
-GridLayout {
-    margin: 10;
+    border: 0;
+    border-bottom: none;
 }
 
-.custom-actionbar {
-    color:white;
-    background-color: darkgray;
+GridLayout {
+    margin: 10;
+    border: 0;
+    border-bottom: none;
+}
+
+.hide {
+    height: 1;
+    visibility: collapse;
+    visibility: collapsed;
+    visibility: hidden;
+}
+
+
+.child {
+    height:2;
+    border-top-style: solid;
+}
+
+ListView.itemTemplate {
+    background-color: gray;
 }

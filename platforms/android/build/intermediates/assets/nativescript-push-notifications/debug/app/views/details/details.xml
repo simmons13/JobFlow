@@ -1,0 +1,33 @@
+<Page loaded="loaded">
+
+    <Page.actionBar>
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
+            <ActionBar.actionItems>
+                <ActionItem text="User" id="user-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="projects-new" tap="gotoView" ios.position="right" />
+               
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    
+
+    <GridLayout columns="*" rows="*, auto">
+        <ListView itemLoading="listViewItemLoading" items="{{ detailsList }}" id="detailsList" itemTap="detailsItemTap">
+            <ListView.itemTemplate>
+                <GridLayout columns="10, *, *" rows="1, auto, *, *, *" colSpan="1" >
+                    
+                    <Label row="0" col="0" colSpan="3" text=" " class="{{ !isChild ? 'child' : '' }}"  />
+                    
+                    <Label row="1" col="0" colSpan="3" text="{{ projectsummary }}" class="{{ isChild ? 'hide' : 'head' }}"  />
+                    
+                    <Label row="2" col="1" text="{{ changesummary }}" horizontalAlignment="left" verticalAlignment="center" class="{{ noChanges ? 'hide' : 'show' }}"/>
+                    <Label row="2" col="2" text="{{ changestatus }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center" class="{{ noChanges ? 'hide' : 'show' }}"/>
+                    
+                    <Label row="3" col="1" colSpan="2" text="click to add change orders" class="{{ !noChanges ? 'hide' : 'show' }}" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        <Label row="1" text="add projects to start" id="noProjects" class="hide" />
+    </GridLayout>
+
+</Page>
