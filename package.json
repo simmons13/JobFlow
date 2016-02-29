@@ -1,14 +1,17 @@
 {
-  "nativescript": {
-    "id": "org.nativescript.JobFlow",
-    "tns-android": {
-      "version": "1.5.1"
-    }
-  },
-  "dependencies": {
-    "nativescript-email": "^1.1.1",
-    "nativescript-push-notifications": "0.0.15",
-    "nativescript-sqlite": "^1.0.7",
-    "tns-core-modules": "1.5.2"
-  }
+	"nativescript": {
+		"id": "org.nativescript.JobFlow",
+		"tns-android": {
+			"version": "1.5.1"
+		},
+		"tns-ios": {
+			"version": "1.6.0"
+		}
+	},
+	"dependencies": {
+		"nativescript-email": "^1.1.1",
+		"nativescript-push-notifications": "0.0.15",
+		"nativescript-sqlite": "^1.0.7",
+		"tns-core-modules": "1.5.2"
+	}
 }

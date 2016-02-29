@@ -1,0 +1,77 @@
+clang version 3.7.0 (tags/RELEASE_370/final)
+Target: i386-apple-darwin
+Thread model: posix
+clang Invocation:
+ "clang-tool" "-cc1" "-triple" "i386-apple-ios8.0.0" "-fsyntax-only" "-disable-free" "-disable-llvm-verifier" "-main-file-name" "umbrella.h" "-mrelocation-model" "pic" "-pic-level" "2" "-mthread-model" "posix" "-mdisable-fp-elim" "-masm-verbose" "-target-cpu" "yonah" "-target-linker-version" "242.2" "-v" "-dwarf-column-info" "-resource-dir" "../lib/clang/3.7.0" "-isysroot" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk" "-D" "DEBUG=1" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator/include" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/../../node_modules/nativescript-sqlite/platforms/ios" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/internal" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/internal/NativeScript/include" "-F/Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator" "-F/Users/steve/Documents/Git/JobFlow/platforms/ios/../../lib/iOS" "-F../../lib/iOS" "-Wno-unknown-pragmas" "-Wno-ignored-attributes" "-std=gnu99" "-fdebug-compilation-dir" "/Users/steve/Documents/Git/JobFlow/platforms/ios/internal/metadata-generator/bin" "-ferror-limit" "0" "-fmessage-length" "0" "-stack-protector" "1" "-mstackrealign" "-fblocks" "-fimplicit-module-maps" "-fobjc-runtime=ios-8.0.0" "-fencode-extended-block-signature" "-fobjc-exceptions" "-fexceptions" "-fmax-type-align=16" "-fdiagnostics-show-option" "-x" "objective-c" "umbrella.h"
+
+ignoring nonexistent directory "/Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator/include"
+ignoring nonexistent directory "../../lib/iOS"
+ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/local/include"
+ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/Library/Frameworks"
+#include "..." search starts here:
+#include <...> search starts here:
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/../../node_modules/nativescript-sqlite/platforms/ios
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/internal
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/internal/NativeScript/include
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator (framework directory)
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/../../lib/iOS (framework directory)
+ ../lib/clang/3.7.0/include
+ /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/include
+ /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+clang version 3.7.0 (tags/RELEASE_370/final)
+Target: i386-apple-darwin
+Thread model: posix
+clang Invocation:
+ "clang-tool" "-cc1" "-triple" "i386-apple-ios8.0.0" "-fsyntax-only" "-disable-free" "-disable-llvm-verifier" "-main-file-name" "umbrella.h" "-mrelocation-model" "pic" "-pic-level" "2" "-mthread-model" "posix" "-mdisable-fp-elim" "-masm-verbose" "-target-cpu" "yonah" "-target-linker-version" "242.2" "-v" "-dwarf-column-info" "-resource-dir" "../lib/clang/3.7.0" "-isysroot" "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk" "-D" "DEBUG=1" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator/include" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/../../node_modules/nativescript-sqlite/platforms/ios" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/internal" "-I" "/Users/steve/Documents/Git/JobFlow/platforms/ios/internal/NativeScript/include" "-F/Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator" "-F/Users/steve/Documents/Git/JobFlow/platforms/ios/../../lib/iOS" "-F../../lib/iOS" "-Wno-unknown-pragmas" "-Wno-ignored-attributes" "-std=gnu99" "-fdebug-compilation-dir" "/Users/steve/Documents/Git/JobFlow/platforms/ios/internal/metadata-generator/bin" "-ferror-limit" "0" "-fmessage-length" "0" "-stack-protector" "1" "-mstackrealign" "-fblocks" "-fimplicit-module-maps" "-fobjc-runtime=ios-8.0.0" "-fencode-extended-block-signature" "-fobjc-exceptions" "-fexceptions" "-fmax-type-align=16" "-fdiagnostics-show-option" "-x" "objective-c" "umbrella.h"
+
+clang -cc1 version 3.7.0 based upon LLVM 3.7.0 default target x86_64-apple-darwin14.5.0
+ignoring nonexistent directory "/Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator/include"
+ignoring nonexistent directory "../../lib/iOS"
+ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/local/include"
+ignoring nonexistent directory "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/Library/Frameworks"
+#include "..." search starts here:
+#include <...> search starts here:
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/../../node_modules/nativescript-sqlite/platforms/ios
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/internal
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/internal/NativeScript/include
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/build/emulator (framework directory)
+ /Users/steve/Documents/Git/JobFlow/platforms/ios/../../lib/iOS (framework directory)
+ ../lib/clang/3.7.0/include
+ /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/include
+ /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/System/Library/Frameworks (framework directory)
+End of search list.
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/module.modulemap:1:8: error: redefinition of module 'Compression'
+module Compression [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/include/module.modulemap:1:8: note: previously defined here
+module Compression [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/module.modulemap:6:8: error: redefinition of module 'Darwin'
+module Darwin [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/include/module.modulemap:6:8: note: previously defined here
+module Darwin [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/module.modulemap:1478:8: error: redefinition of module 'os'
+module os [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/include/module.modulemap:1599:8: note: previously defined here
+module os [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/usr/include/module.modulemap:1494:8: error: redefinition of module 'libkern'
+module libkern [system] [extern_c] {
+       ^
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator9.2.sdk/usr/include/module.modulemap:1615:8: note: previously defined here
+module libkern [system] [extern_c] {
+       ^
+In file included from umbrella.h:783:
+/Users/steve/Documents/Git/JobFlow/platforms/ios/../../lib/iOS/PushPlugin.framework/Headers/PushPlugin.h:11:9: error: 'Push.h' file not found with <angled> include; use "quotes" instead
+#import <Push.h>
+        ^~~~~~~~
+        "Push.h"
+/Users/steve/Documents/Git/JobFlow/platforms/ios/../../lib/iOS/PushPlugin.framework/Headers/PushPlugin.h:12:9: error: 'PushManager.h' file not found with <angled> include; use "quotes" instead
+#import <PushManager.h>
+        ^~~~~~~~~~~~~~~
+        "PushManager.h"
+6 errors generated.

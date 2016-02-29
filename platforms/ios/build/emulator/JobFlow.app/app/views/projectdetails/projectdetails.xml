@@ -1,0 +1,39 @@
+
+<Page loaded="loaded">
+
+    <Page.actionBar>
+        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
+            <ActionBar.actionItems>
+                <ActionItem text="Client" id="clients-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="Project" id="projects-edit" tap="gotoView" ios.position="right" />
+                <ActionItem text="+" id="changes-new" tap="gotoView" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+    
+    <GridLayout columns="5, 20, 90, 70, 80, 100" rows="auto,*,auto,*">
+        <Label row="0" col="0" colspan="3" text="{{ projectssummary }}" class="head" horizontalAlignment="left" verticalAlignment="center" />
+        <Label row="0" col="3" text="{{ orig_total }}" class="head" horizontalAlignment="right" verticalAlignment="center" />
+        <Label row="0" col="4" text="{{ orig_competion_date }}" class="head" horizontalAlignment="right" verticalAlignment="center" />
+        <Label row="0" col="5" text="" class="head" horizontalAlignment="right" verticalAlignment="center" />
+             
+        <ListView  row="1" col="0" colspan="6" items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap">
+            <ListView.itemTemplate>
+                <GridLayout columns="10, 10, 70, 70, 80, 100" rows="auto,auto">
+                    <Label row="0" col="1" colspan="2" text="{{ changesummary }}" horizontalAlignment="left" verticalAlignment="center" />            
+                    <Label row="0" col="3" text="{{ changes_total }}" class="{{ statuscss + '_' }}" horizontalAlignment="right" verticalAlignment="center" />
+                    <Label row="0" col="4" text="{{ changes_competion_date }}" class="{{ statuscss + '_' }}" horizontalAlignment="right" verticalAlignment="center" />
+                    <Label row="0" col="5" text="{{ changestatus }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center"/>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView> 
+        
+        <Label row="2" col="0" colspan="3" text="" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+        <Label row="2" col="3" text="{{ current_total }}" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+        <Label row="2" col="4" text="{{ current_competion_date }}" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+        <Label row="2" col="5"  text=" " class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+        
+        <Label row="3" col="1"  text=" " horizontalAlignment="right" verticalAlignment="center" />
+            
+    </GridLayout>
+</Page>

@@ -1,0 +1,20 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  
+    <Page.actionBar>
+        <ActionBar title=" " tap="gotoView"  cssClass="custom-actionbar">
+            <ActionBar.actionItems>
+                <ActionItem text="save" tap="{{ saveForm }}" ios.position="right" />
+                <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
+            </ActionBar.actionItems>
+        </ActionBar>
+    </Page.actionBar>
+        
+   <GridLayout columns="*" rows="auto, 50, 50, 50, 50, *"  >
+        <Label row="0" col="0" text="Tell us details about the client" class="title" textWrap="true" />
+        <TextField row="1" col="0" id="firstname" text="{{ firstname }}" hint="First Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+        <TextField row="2" col="0" id="lastname" text="{{ lastname }}" hint="Last Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+        <TextField row="3" col="0" id="phone" text="{{ phone }}" hint="Phone Number" keyboardType="phone" autocorrect="false" autocapitalizationType="none" />
+        <TextField row="4" col="0" id="email" text="{{ email }}" hint="Email Address" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
+
+    </GridLayout>
+</Page>

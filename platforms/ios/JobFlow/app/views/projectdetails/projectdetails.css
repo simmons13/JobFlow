@@ -1,0 +1,25 @@
+ListView {
+    margin: 1;
+    opacity: 0;
+}
+Label {
+    margin: 5;
+    padding: 10;
+    horizontal-align: left;
+    vertical-align: center;
+}
+TextField {
+    border-width: 5;
+    border-style: solid;
+    border-color: #034793;
+}
+GridLayout {
+    margin: 10;
+}
+
+.subtotal {
+    width: 1000%;
+    color: #88888;
+    margin-top: 20;
+    background-color: lightgray;
+}

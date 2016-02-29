@@ -1,0 +1,24 @@
+{
+	"name": "tns-template-jobflow",
+	"main": "app.js",
+	"version": "1.5.1",
+	"author": "Stacie Simmons <simmons13@gmail.com>",
+	"description": "JobFlow assists contractors with Change Orders",
+	"license": "Apache-2.0",
+	"keywords": [
+		"contracts",
+		"work",
+		"change order",
+	],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/NativeScript/template-hello-world.git"
+	},
+	"bugs": {
+		"url": "https://github.com/NativeScript/template-hello-world/issues"
+	},
+	"homepage": "https://github.com/NativeScript/template-hello-world",
+	"android": {
+		"v8Flags": "--expose_gc"
+	}
+}

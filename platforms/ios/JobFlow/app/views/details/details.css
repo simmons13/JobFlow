@@ -1,0 +1,29 @@
+ListView {
+    margin: 1;
+    opacity: 0;
+}
+Label {
+    padding: 5;
+    horizontal-align: left;
+    vertical-align: center;
+}
+TextField {
+    border: 0;
+    border-bottom: none;
+}
+
+GridLayout {
+    margin: 10;
+    border: 0;
+    border-bottom: none;
+}
+
+
+.child {
+    height:2;
+    border-top-style: solid;
+}
+
+ListView.itemTemplate {
+    background-color: gray;
+}
