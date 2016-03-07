@@ -1,21 +1,19 @@
 ﻿@import { url('~/platform.css') };
 
+
 .title {
-    font-size: 25;
     text-align: center;
     margin: 20;
     
 }
 
 .textfield_label {
-    font-size: 18;
     text-align: left;
     margin-left: 5;
 }
 
 
 .textfield_dollar {
-    font-size: 18;
     text-align: left;
     margin-left: 5;
     border-bottom: 1 black solid;
@@ -24,36 +22,28 @@
 
 
 .textfield {
-    font-size: 18;
-    width: 200%;
+    width: 100%;
     text-align: left;
     border-bottom: 1 black solid;
 }
 
 button {
     margin-top: 10;
-    font-size: 30;
     horizontal-align: center;
 }
 
 .message {
-    font-size: 20;
     color: #284848;
     horizontal-align: center;
 }
 
 .custom-actionbar {
     color:white;
-    background-color: #2dcc70;
-    background-color: #238b32;
     background-color: #e3e3e3;
 }
 
 .head {
-    width: 1000%;
-    background-color: #3598db;
-    background-color: #898989;
-    background-color: #02318b;
+    width: 100%;
     background-color: #3598db;
     color: white;
     margin-top: 20;
@@ -93,6 +83,35 @@ button {
 }
 
 
-.test {
-    color: red;
+Label {
+    font-size: 10;
 }
+
+.custom-actionbar {
+    background-image: url('~/res/logo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: black;
+    color: white;
+}
+
+
+
+.title {
+    font-size: 17;
+    
+}
+
+.textfield_label {
+    font-size: 10;
+}
+
+
+.textfield_dollar {
+    font-size: 10;
+}
+
+.textfield {
+    font-size: 10;
+}
+

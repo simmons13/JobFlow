@@ -20,3 +20,22 @@ TextField {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+
+.title {
+    font-size: 25;
+    
+}
+
+.textfield_label {
+    font-size: 18;
+}
+
+
+.textfield_dollar {
+    font-size: 18;
+}
+
+.textfield {
+    font-size: 18;
+}

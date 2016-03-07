@@ -1,0 +1,31 @@
+Label {
+    font-size: 3;
+    color:red;
+}
+
+.custom-actionbar {
+    background-image: url('~/images/logo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+
+.title {
+    font-size: 20;
+    
+}
+
+.textfield_label {
+    font-size: 13;
+}
+
+
+.textfield_dollar {
+    font-size: 13;
+}
+
+.textfield {
+    font-size: 13;
+}
+
