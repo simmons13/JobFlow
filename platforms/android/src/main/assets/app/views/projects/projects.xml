@@ -12,9 +12,9 @@
   <ScrollView>
      <GridLayout columns="40, 90, 20, *" rows="*, *, *, *, *, *, *, *, *"  >
         
-        <Label row="0" col="0" colSpan="4" text="Fill out details on the project" class="title"  textWrap="true"/>
+        <Label row="0" col="0" colSpan="4" text="Project Details" class="title"  textWrap="true"/>
         
-        <Label row="1" col="0" colSpan="4" text="Project summary:" class="textfield_label" />
+        <Label row="1" col="0" colSpan="4" text="Project name:" class="textfield_label" />
         <TextField row="2" col="0" colSpan="4" id="projectssummary" text="{{ projectssummary }}" hint="" 
             keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
         

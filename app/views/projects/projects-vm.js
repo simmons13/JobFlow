@@ -17,7 +17,7 @@ function Projects () {
             
         } else {
             viewModel.projectssummary = i_object ? i_object.projectssummary || "" : "";
-            viewModel.orig_total = i_object ? i_object.orig_total || "0" : "0";
+            viewModel.orig_total = i_object ? i_object.orig_total || "" : "";
             viewModel.orig_competion_date = i_object ? i_object.orig_competion_date || "" : "";
             viewModel.contract_date = i_object ? i_object.contract_date || "" : "";
             viewModel.client = i_object ? i_object.firstname + " " + i_object.lastname || "Click to add client" : "Click to add client";

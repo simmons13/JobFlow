@@ -4,7 +4,12 @@
     font-size: 25;
     text-align: center;
     margin: 20;
-    
+}
+
+.smalltitle {
+    font-size: 20;
+    text-align: center;
+    margin: 5;
 }
 
 .textfield_label {
@@ -69,7 +74,7 @@ button {
 
 
 .send, .waiting {
-    color: gray;
+    color: #808080;
 }
 
 .accepted, .accepted_ {
@@ -81,7 +86,7 @@ button {
 }
 
 .waiting_, .send_  {
-    color: lightgray;
+    color: #BBBBBB;
 }
 
 

@@ -23,3 +23,8 @@ GridLayout {
     margin-top: 20;
     background-color: lightgray;
 }
+
+.subtitle {
+    background-color: #011640;
+    color: white;
+}

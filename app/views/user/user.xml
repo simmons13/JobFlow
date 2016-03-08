@@ -9,12 +9,13 @@
         </ActionBar>
     </Page.actionBar>
   
-    <GridLayout columns="*" rows="auto, 50, 50, 50, 50, *"  >
-        <Label row="0" col="0" text="Tell us about you and your company" class="title"  textWrap="true"/>
+    <GridLayout columns="*" rows="auto, 50, 50, 50, 50, 50, *"  >
+        <Label row="0" col="0" text="Company Details" class="title"  textWrap="true"/>
         <TextField row="1" col="0"  id="userfirstname" text="{{ userfirstname }}" hint="First name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
         <TextField row="2" col="0"  id="userlastname" text="{{ userlastname }}" hint="Last name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
         <TextField row="3" col="0"  id="userphone" text="{{ userphone }}" hint="Phone number" keyboardType="phone" autocorrect="false" autocapitalizationType="none" />
-        <TextField row="4" col="0"  id="usercompanyname" text="{{ usercompanyname }}" hint="Company Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
-        <!-- TextField row="5" col="0"  id="usercompanylogo" text="{{ usercompanylogo }}" hint="Company logo" keyboardType="logo" autocorrect="false" autocapitalizationType="none" / -->
+        <TextField row="4" col="0"  id="useraddress" text="{{ useraddress }}" hint="Address" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+        <TextField row="5" col="0"  id="usercompanyname" text="{{ usercompanyname }}" hint="Company Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+        <!-- TextField row="7" col="0"  id="usercompanylogo" text="{{ usercompanylogo }}" hint="Company logo" keyboardType="logo" autocorrect="false" autocapitalizationType="none" / -->
   </GridLayout>
 </Page>

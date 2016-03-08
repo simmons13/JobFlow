@@ -12,6 +12,9 @@ var pageData = new Observable({
     details: ""
 });
 
+var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
 exports.gotoView = scripts.gotoView;
 exports.loaded = function(i_args) {
        
@@ -32,10 +35,14 @@ exports.loaded = function(i_args) {
             pageData.projectssummary = i_result.projectssummary || "-";
             
             pageData.current_total = i_result.current_total ? "$"+i_result.current_total : "-";
-            pageData.current_competion_date = i_result.current_competion_date ? i_result.current_competion_date : "-";
             pageData.orig_total = i_result.orig_total ? "$"+i_result.orig_total : "-";
-            pageData.orig_competion_date = i_result.orig_competion_date ? i_result.orig_competion_date : "-";
-        
+            
+            var d = i_result.current_competion_date ? new Date(i_result.current_competion_date) : null;
+            pageData.current_competion_date = d ? d.getDate() +"-"+ monthNames[d.getMonth()] +"-"+ (d.getFullYear()+"").substr(2) : "-";
+            
+            var d = i_result.orig_competion_date ? new Date(i_result.orig_competion_date) : null;
+            pageData.orig_competion_date = d ? d.getDate() +"-"+ monthNames[d.getMonth()] +"-"+ (d.getFullYear()+"").substr(2) : "-";
+            
         }
     
         // load project details
@@ -67,5 +74,5 @@ exports.detailsItemTap = function(i_args) {
     console.error("CHANGE ID:"+selected.changesid);
     appSettings.setString("changesid", selected.changesid+"");
     
-    scripts.gotoView("email");
+    scripts.gotoView("changes-edit");
 }

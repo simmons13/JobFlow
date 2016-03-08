@@ -10,7 +10,7 @@
     </Page.actionBar>
         
    <GridLayout columns="*" rows="auto, 50, 50, 50, 50, *"  >
-        <Label row="0" col="0" text="Tell us details about the client" class="title" textWrap="true" />
+        <Label row="0" col="0" text="Client Details" class="title" textWrap="true" />
         <TextField row="1" col="0" id="firstname" text="{{ firstname }}" hint="First Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
         <TextField row="2" col="0" id="lastname" text="{{ lastname }}" hint="Last Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
         <TextField row="3" col="0" id="phone" text="{{ phone }}" hint="Phone Number" keyboardType="phone" autocorrect="false" autocapitalizationType="none" />

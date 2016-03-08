@@ -11,8 +11,10 @@
     </Page.actionBar>
     
 
-    <GridLayout columns="*" rows="*, auto">
-        <ListView itemLoading="listViewItemLoading" items="{{ detailsList }}" id="detailsList" itemTap="detailsItemTap">
+    <GridLayout columns="*" rows="45, *, auto">
+        <Label row="0" col="0" text="Current Projects" class="smalltitle"  textWrap="true"/>
+        
+        <ListView row="1" col="0" itemLoading="listViewItemLoading" items="{{ detailsList }}" id="detailsList" itemTap="detailsItemTap">
             <ListView.itemTemplate>
                 <GridLayout columns="10, *, *" rows="1, auto, *, *, *" colSpan="1" >
                     
@@ -27,7 +29,8 @@
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
-        <Label row="1" text="add projects to start" id="noProjects" class="{{ !noProjects ? 'hide' : 'show' }}" />
+        
+        <Label row="2" col="0" text="add projects to start" id="noProjects" class="{{ !noProjects ? 'hide' : 'show' }}" />
     </GridLayout>
 
 </Page>

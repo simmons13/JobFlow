@@ -10,6 +10,7 @@ function User() {
         viewModel.userfirstname = i_object ? i_object.userfirstname || "" : "";
         viewModel.userlastname = i_object ? i_object.userlastname || "" : "";
         viewModel.userphone = i_object ? i_object.userphone || "" : "";
+        viewModel.useraddress = i_object ? i_object.useraddress || "" : "";
         viewModel.usercompanyname = i_object ? i_object.usercompanyname || "" : "";
         viewModel.usercompanylogo = i_object ? i_object.usercompanylogo || "" : "";
     };

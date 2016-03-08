@@ -50,6 +50,7 @@ module.exports.user = {
         {id:"userfirstname", type:"text", title:"First name"},
         {id:"userlastname", type:"text", title:"Last name"},
         {id:"userphone", type:"tel", title:"Phone number"},
+        {id:"useraddress", type:"text", title:"Company address"},
         {id:"usercompanyname", type:"text", title:"Company name"},
         {id:"usercompanylogo", type:"file", title:"Company logo"}
     ],
@@ -58,22 +59,23 @@ module.exports.user = {
             "userfirstname VARCHAR(50), " +
             "userlastname VARCHAR(50), " +
             "userphone VARCHAR(30), " +
+            "useraddress VARCHAR(150), " +
             "usercompanyname VARCHAR(100), " +
             "usercompanylogo VARCHAR(500) )",
     new: "INSERT INTO user ( "+
-            "userid, userfirstname, userlastname, userphone, usercompanyname, usercompanylogo" +
+            "userid, userfirstname, userlastname, userphone, useraddress, usercompanyname, usercompanylogo" +
             ") VALUES (" +
             "'&userid&', '&userfirstname&', '&userlastname&', '&userphone&', " +
-            "'&usercompanyname&', '&usercompanylogo&'" +
+            "'&useraddress&', '&usercompanyname&', '&usercompanylogo&'" +
             ")",
     edit: "UPDATE clients "+
             "SET " +
             "userfirstname='&userfirstname&', userlastname='&userlastname&', userphone='&userphone&', " +
-            "usercompanyname='&usercompanyname&', usercompanylogo='&usercompanylogo&' " +
+            "useraddress='&useraddress&', usercompanyname='&usercompanyname&', 'usercompanylogo='&usercompanylogo&' " +
             "WHERE clientsid=&clientsid& ",
     select: "SELECT * FROM user",
     prepopulateCheck: "SELECT * FROM user WHERE userid=1",
-    goto: "details"
+    goto: "projects"
 };
 
 module.exports.clients = {
@@ -187,7 +189,8 @@ module.exports.projectdetails = {
         "LEFT JOIN changes " +
         "ON projectsid = project " +
         "OR projectsid IS NULL OR project IS NULL " +
-        "WHERE &cond&"
+        "WHERE &cond&",
+    goto: "changes"
 };
 
 module.exports.email = {
