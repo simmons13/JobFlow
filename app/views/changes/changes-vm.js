@@ -21,8 +21,8 @@ function Changes() {
         changeModel.statuscss = i_object ? config.statuscss[i_object.status] : "";
         changeModel.status = i_object ? i_object.status : -1;
                     
-        changeModel.changecost = i_object ? i_object.changecost || false : false;
-        changeModel.changedate = i_object ? i_object.changedate || false : false;
+        changeModel.changecost = i_object && i_object.changecost == "true" ? "true" : false;
+        changeModel.changedate = i_object &&  i_object.changedate == "true" ? "true" : false;
         changeModel.changecostdirection = i_object ? i_object.changecostdirection || "increase" : "increase";   
         changeModel.changedatedirection = i_object ? i_object.changedatedirection || "increase" : "increase";
         

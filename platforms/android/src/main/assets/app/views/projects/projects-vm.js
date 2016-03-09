@@ -23,16 +23,16 @@ function Projects () {
             viewModel.client = i_object ? i_object.firstname + " " + i_object.lastname || "Click to add client" : "Click to add client";
             
             var dateObj;
+            var date = new Date();
             dateObj = viewModel.orig_competion_date.split("-");
-            viewModel.orig_competion_date_dayy = dateObj.length > 0 ? dateObj[0] || 4 : 4;
-            viewModel.orig_competion_date_month = dateObj.length > 1 ? dateObj[1] || 5 : 5;
-            viewModel.orig_competion_date_year = dateObj.length > 2 ? dateObj[2] || 2016: 2016;
-            
+            viewModel.orig_competion_date_dayy = dateObj.length > 0 ? dateObj[0] || date.getDate() : date.getDate();
+            viewModel.orig_competion_date_month = dateObj.length > 1 ? dateObj[1] || date.getMonth() +1 : date.getMonth() +1;
+            viewModel.orig_competion_date_year = dateObj.length > 2 ? dateObj[2] || date.getFullYear() : date.getFullYear();
             
             dateObj = viewModel.contract_date.split("-");
-            viewModel.contract_date_dayy = dateObj.length > 0 ? dateObj[0] || 4 : 4;
-            viewModel.contract_date_month = dateObj.length > 1 ? dateObj[1] || 5 : 5;
-            viewModel.contract_date_year = dateObj.length > 2 ? dateObj[2] || 2016 : 2016;
+            viewModel.contract_date_dayy = dateObj.length > 0 ? dateObj[0] || date.getDate() : date.getDate();
+            viewModel.contract_date_month = dateObj.length > 1 ? dateObj[1] || date.getMonth() +1 : date.getMonth() +1;
+            viewModel.contract_date_year = dateObj.length > 2 ? dateObj[2] || date.getFullYear() : date.getFullYear();
 
         }
     };

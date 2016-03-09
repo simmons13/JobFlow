@@ -18,12 +18,22 @@ GridLayout {
     border-bottom: none;
 }
 
+ListView.itemTemplate {
+    background-color: gray;
+}
 
 .child {
     height:2;
     border-top-style: solid;
 }
 
-ListView.itemTemplate {
-    background-color: gray;
+
+.head {
+    width: 1000%;
+    background-color: #3598db;
+    background-color: #898989;
+    background-color: #02318b;
+    background-color: #3598db;
+    color: white;
+    margin-top: 20;
 }

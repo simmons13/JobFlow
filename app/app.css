@@ -21,8 +21,8 @@
 
 .textfield_dollar {
     font-size: 18;
-    text-align: left;
-    margin-left: 5;
+    text-align: right;
+    margin-right: 2;
     border-bottom: 1 black solid;
 }
 
@@ -52,16 +52,6 @@ button {
     background-color: #2dcc70;
     background-color: #238b32;
     background-color: #e3e3e3;
-}
-
-.head {
-    width: 1000%;
-    background-color: #3598db;
-    background-color: #898989;
-    background-color: #02318b;
-    background-color: #3598db;
-    color: white;
-    margin-top: 20;
 }
 
 .send {
@@ -97,7 +87,3 @@ button {
     visibility: hidden;
 }
 
-
-.test {
-    color: red;
-}

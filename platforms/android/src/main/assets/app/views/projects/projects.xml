@@ -10,19 +10,19 @@
     </Page.actionBar>
   
   <ScrollView>
-     <GridLayout columns="40, 90, 20, *" rows="*, *, *, *, *, *, *, *, *"  >
+     <GridLayout columns="40, 90, 20, *" rows="*, *, 0, *, *, *, *, *, *"  >
         
         <Label row="0" col="0" colSpan="4" text="Project Details" class="title"  textWrap="true"/>
         
-        <Label row="1" col="0" colSpan="4" text="Project name:" class="textfield_label" />
-        <TextField row="2" col="0" colSpan="4" id="projectssummary" text="{{ projectssummary }}" hint="" 
+        <Label row="1" col="0" colSpan="3" text="Project name:" class="textfield_label" />
+        <TextField row="1" col="3" colSpan="1" id="projectssummary" text="{{ projectssummary }}" hint="" 
             keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
         
         <Label row="3" col="0" colSpan="3" text="Project client:" class="textfield_label" />
         <Label row="3" col="3" class="textfield" id="client" text="{{ client }}" tap="{{ tap }}" horizontalAlignment="left" />
         
         <Label row="4" col="0" colSpan="2" text="Total project cost:" class="textfield_label" />
-        <Label row="4" col="2" text="$ " class="textfield_dollar" />
+        <Label row="4" col="2" text="$" class="textfield_dollar" />
         <TextField row="4" col="3" id="orig_total" text="{{ orig_total }}" hint="0.00" keyboardType="Numbers" 
             autocorrect="false" autocapitalizationType="sentences" class="textfield_value" />
         
