@@ -42,19 +42,26 @@ exports.loaded = function(i_args) {
             
             var d = i_result.orig_competion_date ? new Date(i_result.orig_competion_date) : null;
             pageData.orig_competion_date = d ? d.getDate() +"-"+ monthNames[d.getMonth()] +"-"+ (d.getFullYear()+"").substr(2) : "-";
-            
-        }
-    
-        // load project details
-        var listView = page.getViewById("detailsList");
-        page.bindingContext = pageData;
-        detailsList.empty();
-        detailsList.load();
         
-        listView.animate({
-            opacity: 1,
-            duration: 1000
-        });
+            // load project details
+            var listView = page.getViewById("detailsList");
+            page.bindingContext = pageData;
+            detailsList.empty();
+            detailsList.load();
+            
+            if (detailsList.length>1 || (detailsList.length==1 && detailsList[0].changesid)) {
+            
+                listView.animate({
+                    opacity: 1,
+                    duration: 1000
+                });       
+            } else {
+            
+            scripts.gotoView("changes");
+        }
+                    
+        } 
+    
     }
      
 }

@@ -2,43 +2,39 @@
 <Page loaded="loaded">
 
     <Page.actionBar>
-        <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
+        <ActionBar title="{{ projectssummary }}" tap="gotoView" cssClass="custom-actionbar">
             <ActionBar.actionItems>
-                <ActionItem text="Client" id="clients-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="Project" id="projects-edit" tap="gotoView" ios.position="right" />
-                <ActionItem text="+" id="changes-new" tap="gotoView" ios.position="right" />
+                <ActionItem text="Client" id="clients-edit" tap="gotoView" ios.position="right" android.systemIcon="ic_menu_allfriends" />
+                <ActionItem text="Project" id="projects-edit" tap="gotoView" ios.position="right" class="projecticon" android.systemIcon="ic_menu_archive" />
+                <ActionItem id="changes-new" tap="gotoView" ios.position="right" android.systemIcon="ic_menu_add" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
     
-    <GridLayout columns="5, 20, 90, 70, 80, *" rows="30, 40, *, 60, *">
-        
-        <GridLayout row="0" col="0" colspan="6" columns="10, 10, 70, 70, 80, *" rows="auto, *" class="gridsubtitle" >
+    <GridLayout rows="30, auto, *, 0, 60, *" columns="*">
+         
+        <!-- SUB TITLE -->
+        <GridLayout row="0" col="0" columns="10, 10, 70, 70, 90, 120, *" rows="auto, *" class="gridsubtitle" >
             <Label row="0" col="0" colspan="3" text=" " horizontalAlignment="left" verticalAlignment="center" />            
             <Label row="0" col="3" text="Cost" class="subtitle" horizontalAlignment="center" verticalAlignment="center" />
             <Label row="0" col="4" text="Date" class="subtitle" horizontalAlignment="center" verticalAlignment="center" />
             <Label row="0" col="5" text="Status" class="subtitle" horizontalAlignment="center" verticalAlignment="center"/>
         </GridLayout>
 
-        <GridLayout row="1" col="0" colspan="6" columns="10, 10, 70, 70, 80, *" rows="auto, *" class="gridhead" >
-            <Label row="0" col="0" colspan="3" text="{{ projectssummary }}" class="head" horizontalAlignment="left" verticalAlignment="center" />
+        <!-- PROJECT SUMMARY -->
+        <GridLayout row="1" col="0"  columns="10, 10, 70, 70, 90, *" rows="auto, *" class="head" >
+            <Label row="0" col="0" colspan="3" text="Agreement" class="gridsubtitle" horizontalAlignment="right" verticalAlignment="center" />
             <Label row="0" col="3" text="{{ orig_total }}" class="head" horizontalAlignment="right" verticalAlignment="center" />
             <Label row="0" col="4" text="{{ orig_competion_date }}" class="head" horizontalAlignment="right" verticalAlignment="center" />
             <Label row="0" col="5" text="" class="head" horizontalAlignment="right" verticalAlignment="center" />
         </GridLayout>
-    
-    
-    <!--
-        <Label row="1" col="0" colspan="3" text="{{ projectssummary }}" class="head" horizontalAlignment="left" verticalAlignment="center" />
-        <Label row="1" col="3" text="{{ orig_total }}" class="head" horizontalAlignment="right" verticalAlignment="center" />
-        <Label row="1" col="4" text="{{ orig_competion_date }}" class="head" horizontalAlignment="right" verticalAlignment="center" />
-        <Label row="1" col="5" text="" class="head" horizontalAlignment="right" verticalAlignment="center" />
-    -->
            
-        <ListView  row="2" col="0" colspan="6" items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap">
+        <!-- CHANGES -->
+        <ListView  row="2" col="0"  items="{{ detailsList }}" id="detailsList" index="{{ changesid }}"  itemTap="detailsItemTap">
             <ListView.itemTemplate>
                 <GridLayout columns="10, 10, 70, 70, 80, *" rows="auto, auto">
-                    <Label row="0" col="1" colspan="2" text="{{ changesummary }}" horizontalAlignment="left" verticalAlignment="center" />            
+                    <Label row="0" col="0" text=" " class="gridtitle" horizontalAlignment="left" verticalAlignment="center" />            
+                    <Label row="0" col="1" colspan="2" text="{{ changesummary }}" class="gridtitle" horizontalAlignment="right" verticalAlignment="center" />            
                     <Label row="0" col="3" text="{{ changes_total }}" class="{{ statuscss + '_' }}" horizontalAlignment="right" verticalAlignment="center" />
                     <Label row="0" col="4" text="{{ changes_competion_date }}" class="{{ statuscss + '_' }}" horizontalAlignment="right" verticalAlignment="center" />
                     <Label row="0" col="5" text="{{ changestatus }}" class="{{ statuscss }}" horizontalAlignment="right" verticalAlignment="center"/>
@@ -46,10 +42,18 @@
             </ListView.itemTemplate>
         </ListView> 
         
-        <Label row="3" col="0" colspan="3" text="" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
-        <Label row="3" col="3" text="{{ current_total }}" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
-        <Label row="3" col="4" text="{{ current_competion_date }}" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
-        <Label row="3" col="5"  text=" " class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+        <!-- BLUE CONT -->
+        <GridLayout row="3" col="0" columns="90" rows="0" >
+            <Label row="0" col="0" text=" " class="gridspace" horizontalAlignment="left" verticalAlignment="center" />
+        </GridLayout>
+        
+        <!-- SUB TOTAL -->
+        <GridLayout row="4" col="0" columns="90, 70, 80, *" rows="*"  >
+            <Label row="0" col="0" text="Current" class="gridsubtotal" horizontalAlignment="left" verticalAlignment="center" />
+            <Label row="0" col="1" text="{{ current_total }}" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+            <Label row="0" col="2" text="{{ current_competion_date }}" class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+            <Label row="0" col="3" text=" " class="subtotal" horizontalAlignment="right" verticalAlignment="center" />
+        </GridLayout>
         
             
     </GridLayout>

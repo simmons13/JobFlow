@@ -61,6 +61,7 @@ function DetailsListViewModel(items) {
                     isChild: currentItems[i_result.projectsid] > 1,
                     noChanges: (currentItems[i_result.projectsid] == 1 && i_result.changesid == null) 
                 });
+                console.error("--"+i_result.status+":"+config.statuscss[i_result.status])
                 
                 //hide label 
             }

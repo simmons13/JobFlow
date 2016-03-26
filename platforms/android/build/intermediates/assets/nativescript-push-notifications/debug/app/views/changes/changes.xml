@@ -3,6 +3,7 @@
     <Page.actionBar>
         <ActionBar title=" " tap="gotoView" cssClass="custom-actionbar">
             <ActionBar.actionItems>
+                <ActionItem text="send" tap="{{ sendOrder }}" ios.position="right" />
                 <ActionItem text="save" tap="{{ saveForm }}" ios.position="right" />
                 <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
             </ActionBar.actionItems>
@@ -10,42 +11,69 @@
     </Page.actionBar>
   
     <ScrollView> 
-     <GridLayout columns="40, 90, 50, 1, 30, 50, *" rows="*, *, *, *, *, *, *"  >
-        
-        <Label row="0" col="0" colSpan="7" text="Fill out details on the Change Order" class="title"  textWrap="true"/>
-        
-        <Label row="1" col="0" colSpan="7" class="textfield_label" >
-            <Span text="Change summary: " class="textfield_label" />
-        </Label>
-        <TextField row="2" col="0" colSpan="7" id="changessummary" text="{{ changessummary }}" 
-            keyboardType="text" autocorrect="true" autocapitalizationType="sentences" textWrap="true" />
-        
-        <Label row="3" col="0" colSpan="6" class="textfield_label"  textWrap="true" tap="{{ changeCostDirection }}">
-            <Span text="Will this change " class="textfield_label" tap="{{ changeCostDirection }}" />
-            <Span text="{{ changecostdirection }} " fontAttributes="Bold" class="textfield_label" tap="{{ changeCostDirection }}" />
-            <Span text=" the completion cost:" class="textfield_label" tap="{{ changeCostDirection }}" />
-        </Label>
-        <Switch row="3" col="6" checked="{{ changecost }}" />
-        
-        <Label row="4" col="1" colSpan="2" text="Change cost:" class="{{ changecost ? 'textfield_label' : 'hide' }}" />
-        <Label row="4" col="2" text=" $ " class="{{ changecost ? 'textfield_label' : 'hide' }}" style="text-align:right;" />
-        <TextField row="4" col="4" colSpan="2" id="changes_total" text="{{ changes_total }}" keyboardType="text" autocorrect="true" 
-            autocapitalizationType="sentences" class="{{ changecost ? 'textfield_value' : 'hide' }}" hint="0.00" />
-        
-        <Label row="5" col="0" colSpan="6" class="textfield_label"  textWrap="true" tap="{{ changeDateDirection.checked = true }}">
-            <Span text="Will this change " class="textfield_label" tap="{{ console.error(1); }}" />
-            <Span text="{{ changedatedecrease ? 'decrease' : 'increase' }} " fontAttributes="Bold" class="textfield_label" tap="{{ console.error(1); changeDateDirection.checked = true }}" />
-            <Span text=" the completion date:" class="textfield_label" tap="{{ changeDateDirection.checked = true }}" />
-        </Label>
-        <Switch row="5" col="6" checked="{{ changedatedecrease ? false : true }}" id="changeDateDirection" class="hide"/>
-        <Switch row="5" col="6" checked="{{ changedate }}" />
-        
-        <Label row="6" col="1" colSpan="2" text="{{ '# Days ' + changedatedirection + ':' }}" class="{{ changedate ? 'textfield_label' : 'hide' }}"  />
-        <TextField row="6" col="4" colSpan="2" id="changes_competion_date" text="{{ changes_competion_date }}" keyboardType="text" autocorrect="true" 
-            autocapitalizationType="sentences" class="{{ changedate ? 'textfield_value' : 'hide' }}" hint="0.00" />
+        <StackLayout>        
+            <Label row="0" col="0" colSpan="7" text="Change Order Details" class="title"  textWrap="true"/>
             
-        
-    </GridLayout>
+            <GridLayout columns="40, 30, 60, 50, 1, 30, 50, *" rows="*, *, *, *, *, *, *, *"  >
+
+                
+                <!-- 
+                <Label row="0" col="0" colSpan="7" class="hide"  textWrap="true">
+                    <Span text="Click send to email a copy of the Change Order to the client " class="textfield_label"  />
+                    <Span text="or" class="textfield_label"  />
+                    <Span text="Click test to send a copy to your email for review" class="textfield_label"  />
+                </Label>
+                
+                <Label row="1" col="0" colSpan="2" class="{{ status > -1 ? 'hide' : 'textfield_label' }}" text="Status: " />
+                <Label row="1" col="2" colSpan="5" class="{{ status > -1 ? 'hide' : statuscss }}" text="{{ statuscss }}" />
+                -->
+                <Label row="1" col="0" colSpan="2" class="{{ statuscss == 'send' ? 'hide' : ' textfield_label' }}" >
+                    <Span text="Status: " />
+                </Label>
+                <Label row="1" col="2" colSpan="5" class="{{ statuscss == 'send' ? 'hide' : statuscss + ' textfield_label' }}" 
+                    text="{{ changestatus }}" />
+                
+                <Label row="2" col="0" colSpan="8" class="textfield_label" >
+                    <Span text="Change Order Summary: " class="textfield_label" />
+                </Label>
+                <TextField row="3" col="0" colSpan="8" id="changessummary" text="{{ changessummary }}" 
+                    keyboardType="text" autocorrect="true" autocapitalizationType="sentences"  
+                    textWrap="true" class="{{ statuscss == 'accepted' ? 'hide' : 'show' }}" />
+                <Label row="3" col="0" colSpan="8" text="{{ changessummary }}" 
+                    textWrap="true" class="{{ statuscss == 'accepted' ? 'textfield_label' : 'hide' }}" />
+                
+                
+                <Label row="4" col="0" colSpan="7" class="textfield_label"  textWrap="true" tap="test">
+                    <Span text="Will this change " />
+                    <Span text="{{ changecostdirection }}" fontAttributes="Bold" />
+                    <Span text=" the completion cost:"   />
+                </Label>
+                <Switch row="4" col="7" checked="{{ changecost }}" enabled="false" />
+                
+                <Label row="5" col="1" colSpan="3" text="Change cost:" class="{{ changecost ? 'textfield_label' : 'hide' }}" />
+                <Label row="5" col="3" text=" $ " class="{{ changecost ? 'textfield_label' : 'hide' }}" style="text-align:right;" />
+                <TextField row="5" col="5" colSpan="2" id="changes_total" text="{{ changes_total }}" keyboardType="phone" autocorrect="true" 
+                    class="{{ (changecost && statuscss != 'accepted' ? (statuscss == 'accepted' ? 'hide' : 'textfield_value') : 'hide') }}" hint="0.00" />
+                <Label row="5" col="5" colSpan="2" text="{{ changes_total }}" 
+                    class="{{ changecost ? (statuscss == 'accepted' ? 'textfield_label' : 'hide') : 'hide' }}" />
+                
+                <Label row="6" col="0" colSpan="7" class="textfield_label"  textWrap="true" tap="test">
+                    <Span text="Will this change " class="textfield_label" />
+                    <Span text="{{ changedatedirection }}" fontAttributes="Bold" class="textfield_button" />
+                    <Span text=" the completion date:" class="textfield_label"  /> 
+                </Label>
+                <Switch row="6" col="7" checked="{{ changedate }}" />
+                
+                <Label row="7" col="1" colSpan="3" text="{{ '# Days ' + changedatedirection + ':' }}" 
+                    class="{{ changedate ? 'textfield_label' : 'hide' }}"  />
+                <TextField row="7" col="4" colSpan="3" id="changes_competion_date" text="{{ changes_competion_date }}" 
+                    keyboardType="phone" autocorrect="true" autocapitalizationType="sentences" 
+                    class="{{ changedate && statuscss != 'accepted' ? 'textfield_value' : 'hide' }}" hint="0.00" />
+                <Label row="7" col="4" colSpan="3" text="{{ changes_competion_date || 0 }}" 
+                    class="{{ changedate ? (statuscss == 'accepted' ? 'textfield_label' : 'hide') : 'hide' }}"  />
+                    
+            </GridLayout>
+    </StackLayout>        
   </ScrollView>
 
 </Page>

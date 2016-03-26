@@ -1,5 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  
+
     <Page.actionBar>
         <ActionBar title=" " tap="gotoView"  cssClass="custom-actionbar">
             <ActionBar.actionItems>
@@ -8,34 +8,43 @@
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
-  
+
   <ScrollView>
-     <GridLayout columns="40, 90, 20, *" rows="*, *, *, *, *, *, *, *, *"  >
-        
-        <Label row="0" col="0" colSpan="4" text="Fill out details on the project" class="title"  textWrap="true"/>
-        
-        <Label row="1" col="0" colSpan="4" text="Project summary:" class="textfield_label" />
-        <TextField row="2" col="0" colSpan="4" id="projectssummary" text="{{ projectssummary }}" hint="" 
-            keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
-        
-        <Label row="3" col="0" colSpan="3" text="Project client:" class="textfield_label" />
-        <Label row="3" col="3" class="textfield" id="client" text="{{ client }}" tap="{{ tap }}" horizontalAlignment="left" />
-        
-        <Label row="4" col="0" colSpan="2" text="Total project cost:" class="textfield_label" />
-        <Label row="4" col="2" text="$ " class="textfield_dollar" />
-        <TextField row="4" col="3" id="orig_total" text="{{ orig_total }}" hint="0.00" keyboardType="Numbers" 
-            autocorrect="false" autocapitalizationType="sentences" class="textfield_value" />
-        
-        <Label row="5" col="0" colSpan="4" text="Completion date:" class="textfield_label" />
-        <DatePicker row="6" col="1"  colSpan="3" day="{{ orig_competion_date_day }}" month="{{ orig_competion_date_month }}" 
-            year="{{ orig_competion_date_year }}" id="orig_competion_date" text="{{ orig_competion_date }}" 
-            verticalAlignment="center" horizontalAlignment="center" />
-        
-        <Label row="7" col="0" colSpan="4" text="Contract date:" class="textfield_label" /> 
-        <DatePicker row="8" col="1" colSpan="3" day="{{ contract_date_day }}" month="{{ contract_date_month }}" 
-            year="{{ contract_date_year }}" id="contract_date"  text="{{ contract_date }}" 
-            verticalAlignment="center" horizontalAlignment="center"  />
-    
+     <GridLayout columns="*" rows="*,*">
+        <Label row="0" col="0" colSpan="4" text="Project Details" class="title"  textWrap="true"/>
+
+        <GridLayout row="1" col="0" columns="40, 90, 20, *" rows="10, 0, *, *, *, *, *, *, *, *, 40"  >
+            
+            <Label row="0" col="0" colSpan="4" text="" class="listtop"  textWrap="true"/>
+
+            <Label row="2" col="0" colSpan="3" text="Project name:" class="textfield_label" />
+            <TextField row="2" col="3" colSpan="1" id="projectssummary" text="{{ projectssummary }}" hint=""
+                keyboardType="text" autocorrect="true" autocapitalizationType="sentences" />
+
+            <Label row="3" col="0" colSpan="3" text="Project client:" class="textfield_label" />
+            <Label row="3" col="3" class="textfield" id="client" text="{{ client }}" tap="{{ tap }}" horizontalAlignment="left" />
+
+            <Label row="4" col="0" colSpan="2" text="Total project cost:" class="textfield_label" />
+            <Label row="4" col="2" text="$" class="textfield_dollar" />
+            <TextField row="4" col="3" id="orig_total" text="{{ orig_total }}" hint="0.00" keyboardType="phone"
+                autocorrect="false" autocapitalizationType="sentences" class="textfield_value" />
+
+            <Label row="5" col="0" colSpan="4" text="Completion date:" class="textfield_label" />
+            <DatePicker row="6" col="1" colSpan="3" day="{{ orig_competion_date_dayy }}" month="{{ orig_competion_date_month }}"
+                year="{{ orig_competion_date_year }}" id="orig_competion_date" text="{{ orig_competion_date }}"
+                verticalAlignment="center" horizontalAlignment="center" />
+
+            <Label row="7" col="0" colSpan="4" text="Contract date:" class="textfield_label" />
+            <DatePicker row="8" col="1" colSpan="3" day="{{ contract_date_dayy }}" month="{{ contract_date_month }}"
+                year="{{ contract_date_year }}" id="contract_date"  text="{{ contract_date }}"
+                verticalAlignment="center" horizontalAlignment="center"  />
+
+            <Label row="9" col="0" colSpan="3" text="Project Completed:" class="textfield_label" />
+            <Switch row="9" col="3" colSpan="1" checked="{{ completed }}" horizontalAlignment="left" />
+            
+            <Label row="10" col="0" colSpan="3" text=" " class="textfield_label" />
+            
+        </GridLayout>
     </GridLayout>
   </ScrollView>
 </Page>

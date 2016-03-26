@@ -4,17 +4,15 @@
         <ActionBar title=" " tap="gotoView"  cssClass="custom-actionbar">
             <ActionBar.actionItems>
                 <ActionItem id="projectdetails" text="back" tap="{{ gotoView }}" ios.position="right" />
-                <ActionItem text="send" tap="{{ sendOrder }}" ios.position="right" />
+                <ActionItem text="Change" id="change-edit" tap="gotoView" ios.position="right" />
                 <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
   
   <StackLayout orientation="vertical">
-    <Label text="Click send to email a copy of the Change Order to the client" class="title"  textWrap="true"/>
-    <Label text="or" class="title"  textWrap="true"/>
-    <Label text="Click test to send a copy to your email for review" class="title"  textWrap="true"/>
-    <TextField id="email" text="{{ email }}" keyboardType="text" autocorrect="true" autocapitalizationType="none" />
+    <Label text="Preview and email a copy of the Change Order to the client" class="title"  textWrap="true"/>
+    <Button text="Email" tap="{{ sendOrder }}" />
   </StackLayout>
   
 </Page>

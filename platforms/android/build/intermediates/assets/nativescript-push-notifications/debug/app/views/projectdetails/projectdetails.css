@@ -1,5 +1,5 @@
 ListView {
-    margin: 1;
+    margin: 0;
     opacity: 0;
 }
 Label {
@@ -14,6 +14,32 @@ TextField {
     border-color: #034793;
 }
 GridLayout {
-    margin: 10;
+    margin: 0;
 }
 
+.subtotal {
+    width: 1000%;
+    color: #88888;
+    margin-top: 20;
+    background-color: lightgray;
+}
+
+.gridsubtitle {
+    background-color: #034793;
+    color: white;
+    margin: 0;
+}
+.gridhead {
+    background-color: #3598db;
+    color: white;
+    margin: 0;
+}
+.subtitle {
+    margin: 0;
+    height: 30;
+    padding: 0;
+}
+
+.head {
+    margin-top: 0;
+}

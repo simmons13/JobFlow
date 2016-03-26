@@ -42,6 +42,8 @@ exports.loaded = function(i_args) {
     var _scripts = scripts;
     scripts.SQL(sqlStatement, _process)
     
+    pageData.noProjects = false;
+    
     var listView = page.getViewById("detailsList");
     page.bindingContext = pageData;
     detailsList.empty();

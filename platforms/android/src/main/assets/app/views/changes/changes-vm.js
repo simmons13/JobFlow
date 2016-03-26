@@ -8,7 +8,7 @@ var scripts = require("../../shared/scripts");
 var Observable = require("data/observable").Observable;
 
 function Changes() {
-    
+
     var _viewModel = new Observable({});
     var changeModel = _viewModel;
 
@@ -20,14 +20,14 @@ function Changes() {
         changeModel.changestatus = i_object ? config.status[i_object.status] : "";
         changeModel.statuscss = i_object ? config.statuscss[i_object.status] : "";
         changeModel.status = i_object ? i_object.status : -1;
-                    
-        changeModel.changecost = i_object && i_object.changecost == "true" ? "true" : false;
-        changeModel.changedate = i_object &&  i_object.changedate == "true" ? "true" : false;
-        changeModel.changecostdirection = i_object ? i_object.changecostdirection || "increase" : "increase";   
+
+        changeModel.changecost = i_object && i_object.changecost == "true" ? true : false;
+        changeModel.changedate = i_object &&  i_object.changedate == "true" ? true : false;
+        changeModel.changecostdirection = i_object ? i_object.changecostdirection || "increase" : "increase";
         changeModel.changedatedirection = i_object ? i_object.changedatedirection || "increase" : "increase";
-        
+
     };
-   
+
     changeModel.startForm = scripts.startForm;
     changeModel.loadForm = scripts.loadForm;
     changeModel.gotoView = scripts.gotoView;
@@ -35,8 +35,8 @@ function Changes() {
     changeModel.drop = function() {
         scripts.SQL("DROP TABLE changes");
     };
-    
-    
+
+
 
     changeModel.sendOrder = function () {
 
@@ -102,17 +102,23 @@ function Changes() {
                         }
 
                         console.error("RETURN: " + i_response);
-
                         if (i_response == 1 || i_response == 2) {
                             var sqlAction = config.changes.update;
                             sqlAction = sqlAction.replace("&cond&", "status="+i_response);
                             sqlAction = sqlAction.replace("&changesid&", appSettings.getString("changesid"));
-                            
+
                             timer.clearInterval(id);
 
                             console.error("RETURN: " + sqlAction);
-                            scripts.SQL(sqlAction, runUpdate);
 
+                            if (i_response == 1) {
+                                // update status and values on Accept
+                                scripts.SQL(sqlAction, runUpdate);  
+                            } else {
+                                // update only status on Reject
+                                appSettings.setString("updateSQL", "");
+                                scripts.SQL(sqlAction);
+                            }
 
                         } else {
                             var sqlAction = config.changes.update;
@@ -178,7 +184,7 @@ function Changes() {
                 emailer.compose({
                     subject: "Notice of Change Order",
                     body: emailText,
-                    to: [options.email]
+                    to: [options.email || ""]
                 }).then(function(r) {
 
                     console.log("Email composer closed");
@@ -194,7 +200,9 @@ function Changes() {
                 console.error("changestotal");
                 var nNew = parseInt(i_oOpts.current_total) +
                             parseInt(i_oOpts.changes_total);
-                sCond += "current_total='"+ nNew +"'";
+                if (nNew) {
+                    sCond += "current_total='"+ nNew +"'";
+                }
             }
 
             if (i_oOpts.changedate) {
@@ -202,12 +210,14 @@ function Changes() {
                 var nChangeAmount = parseInt(i_oOpts.changes_competion_date);
                 var nNewDate = new Date(i_oOpts.current_competion_date);
                 nNewDate.setDate(nNewDate.getDate() + nChangeAmount);
-                
-                sCond += sCond == "" ? "" : ", ";
-                sCond += "current_competion_date='"+
-                    (nNewDate.getMonth()+1) + "-" +
-                    nNewDate.getDate() + "-" +
-                    nNewDate.getFullYear() + "' ";
+
+                if (nChangeAmount && nNewDate) {
+                    sCond += sCond == "" ? "" : ", ";
+                    sCond += "current_competion_date='"+
+                        (nNewDate.getMonth()+1) + "-" +
+                        nNewDate.getDate() + "-" +
+                        nNewDate.getFullYear() + "' ";
+                }
             }
 
             updateSQL = updateSQL.replace("&cond&", sCond);
@@ -215,7 +225,7 @@ function Changes() {
             appSettings.setString("updateSQL", updateSQL);
 
         }
-        
+
     }
 
     return changeModel;

@@ -27,8 +27,9 @@ function ProjectsDetailsListViewModel(items) {
                     id: i_result.projectsid,
                     projectssummary: i_result.projectssummary,
                     changesummary: i_result.changessummary || "",
-                    changes_total: i_result.changes_total || "-",
-                    changes_competion_date: i_result.changes_competion_date || "-",
+                    changes_total: i_result.changes_total ? "$"+i_result.changes_total : "-  ",
+                    changes_competion_date: (i_result.changes_competion_date ? "+ "+i_result.changes_competion_date : "-  "),
+                    
                     changestatus: config.status[i_result.status],
                     statuscss: config.statuscss[i_result.status],
                     changesid: i_result.changesid

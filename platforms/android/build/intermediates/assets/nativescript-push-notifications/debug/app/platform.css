@@ -3,6 +3,7 @@
 }
 
 .custom-actionbar {
-    background-image: url('~/images/logo.jpg');
+    background-image: url('~/images/logoD.png');
     background-repeat: no-repeat;
+    background-position: center;
 }

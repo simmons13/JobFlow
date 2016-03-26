@@ -12,6 +12,7 @@ module.exports.projects = {
         {id:"orig_total", type:"text", title:"Contract total cost"},
         {id:"orig_competion_date", type:"date", title:"Contract completion date"},
         {id:"current_competion_date", type:"hidden"},
+        {id:"completed", type:"hidden"},
         {id:"current_total", type:"hidden"},
         {id:"contract_date", type:"date", title:"Contract sign date"}
     ],
@@ -22,16 +23,26 @@ module.exports.projects = {
             "orig_total VARCHAR(50), " +
             "orig_competion_date VARCHAR(50), " +
             "current_competion_date VARCHAR(50), " +
+            "completed INTEGER, " +
             "current_total VARCHAR(50), " +
             "contract_date VARCHAR(50) )",
-    add: "INSERT INTO projects ( "+
-            "projectssummary, client, orig_total, orig_competion_date, current_competion_date, current_total, contract_date" +
+    new: "INSERT INTO projects ( "+
+            "projectssummary, client, orig_total, orig_competion_date, " +
+            "current_competion_date, completed, current_total, contract_date" +
             ") VALUES (" +
-            "'&projectssummary&', '&client&', '&orig_total&', '&orig_competion_date&', '&current_competion_date&', '&current_total&', '&contract_date&'" +
+            "'&projectssummary&', '&client&', '&orig_total&', '&orig_competion_date&', " +
+            "'&current_competion_date&', 0, '&current_total&', '&contract_date&'" +
             ")",
+    edit: "UPDATE projects "+
+            "SET " +
+            "projectssummary='&projectssummary&', client='&client&', " +
+            "completed=&completed&,  contract_date='&contract_date&', orig_total='&orig_total&' " +
+            "WHERE projectsid=&projectsid& ",
+    update: "UPDATE projects SET &cond& WHERE projectsid=&projectsid& ",
     select: "SELECT * FROM projects " +
             "INNER JOIN clients " +
             "ON clientsid = client ",
+            //"WHERE completed <> 1 ",
     goto: "details"
 };
 module.exports.user = {
@@ -42,6 +53,7 @@ module.exports.user = {
         {id:"userfirstname", type:"text", title:"First name"},
         {id:"userlastname", type:"text", title:"Last name"},
         {id:"userphone", type:"tel", title:"Phone number"},
+        {id:"useraddress", type:"text", title:"Company address"},
         {id:"usercompanyname", type:"text", title:"Company name"},
         {id:"usercompanylogo", type:"file", title:"Company logo"}
     ],
@@ -50,16 +62,23 @@ module.exports.user = {
             "userfirstname VARCHAR(50), " +
             "userlastname VARCHAR(50), " +
             "userphone VARCHAR(30), " +
-            "usercompanyname VARCHAR(50), " +
-            "usercompanylogo VARCHAR(50) )",
-    add: "INSERT INTO user ( "+
-            "userid, userfirstname, userlastname, userphone, usercompanyname, usercompanylogo" +
+            "useraddress VARCHAR(150), " +
+            "usercompanyname VARCHAR(100), " +
+            "usercompanylogo VARCHAR(500) )",
+    new: "INSERT INTO user ( "+
+            "userid, userfirstname, userlastname, userphone, useraddress, usercompanyname, usercompanylogo" +
             ") VALUES (" +
-            "'&userid&', '&userfirstname&', '&userlastname&', '&userphone&', '&usercompanyname&', '&usercompanylogo&'" +
+            "'&userid&', '&userfirstname&', '&userlastname&', '&userphone&', " +
+            "'&useraddress&', '&usercompanyname&', '&usercompanylogo&'" +
             ")",
+    edit: "UPDATE clients "+
+            "SET " +
+            "userfirstname='&userfirstname&', userlastname='&userlastname&', userphone='&userphone&', " +
+            "useraddress='&useraddress&', usercompanyname='&usercompanyname&', 'usercompanylogo='&usercompanylogo&' " +
+            "WHERE clientsid=&clientsid& ",
     select: "SELECT * FROM user",
     prepopulateCheck: "SELECT * FROM user WHERE userid=1",
-    goto: "details"
+    goto: "projects"
 };
 
 module.exports.clients = {
@@ -78,14 +97,27 @@ module.exports.clients = {
             "address VARCHAR(100), " +
             "phone VARCHAR(30), " +
             "email VARCHAR(100) )",
-    add: "INSERT INTO clients ( "+
+    new: "INSERT INTO clients ( "+
             "firstname, lastname, address, phone, email" +
             ") VALUES (" +
             "'&firstname&', '&lastname&', '&address&', '&phone&', '&email&'" +
             ")",
+    edit: "UPDATE clients "+
+            "SET " +
+            "firstname='&firstname&', lastname='&lastname&', address='&address&', " +
+            "phone='&phone&', email='&email&' " +
+            "WHERE clientsid=&clientsid& ",
     select: "SELECT * FROM clients t ",
     goto: "projects"
 };
+
+/*
+    viewModel.changecost = false;
+    viewModel.changedate = false;   
+    viewModel.changecostdirection = "increase";   
+    viewModel.changedatedirection = "increase";
+*/
+        
 module.exports.changes = {
     stage: 'changes',
     intro: "Fill in details about the Change Order",
@@ -94,24 +126,44 @@ module.exports.changes = {
         {id:"changessummary", type:"textarea", title:"Enter change summary"},
         {id:"changes_total", type:"textarea", title:"Enter change summary"},
         {id:"changes_competion_date", type:"textarea", title:"Enter change summary"},
+        {id:"changecost", type:"textarea", title:"Enter change summary"},
+        {id:"changedate", type:"textarea", title:"Enter change summary"},
+        {id:"changecostdirection", type:"textarea", title:"Enter change summary"},
+        {id:"changedatedirection", type:"textarea", title:"Enter change summary"},
         {id:"status", type:"hidden"},
-        {id:"project", type:"hidden"},
+        {id:"project", type:"hidden"}
     ],
     create: "CREATE TABLE IF NOT EXISTS changes ( "+
             "changesid INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "changessummary VARCHAR(50), " +
             "changes_total VARCHAR(50), " +
             "changes_competion_date VARCHAR(50), " +
+            "changecost VARCHAR(10), " +
+            "changedate VARCHAR(10), " +
+            "changecostdirection VARCHAR(50), " +
+            "changedatedirection VARCHAR(50), " +
             "project INTEGER, " +
             "status INTEGER )",
-    add: "INSERT INTO changes ( "+
-            "changessummary, changes_total, changes_competion_date, project, status " +
+    new: "INSERT INTO changes ( "+
+            "changessummary, changes_total, changes_competion_date, " + 
+            "changecost, changedate, changecostdirection, changedatedirection, " +
+            "project, status " +
             ") VALUES (" +
-            "'&changessummary&', '&changes_total&', '&changes_competion_date&', '&project&', -1" +
+            "'&changessummary&', '&changes_total&', '&changes_competion_date&', " +
+            "'&changecost&', '&changedate&', '&changecostdirection&', '&changedatedirection&', " +
+            "'&project&', -1" +
             ")",
+    edit: "UPDATE changes "+
+            "SET " +
+            "changessummary='&changessummary&', changes_total='&changes_total&', " +
+            "changes_competion_date='&changes_competion_date&', changecost='&changecost&', " +
+            "changedate='&changedate&', changecostdirection='&changecostdirection&', " +
+            "changedatedirection='&changedatedirection&', " +
+            "status=-1 " +
+            "WHERE changesid=&changesid& ",
     update: "UPDATE changes SET &cond& WHERE changesid=&changesid& ",
     select: "SELECT * FROM changes t",
-    goto: "email"
+    goto: "projectdetails"
 };
 module.exports.details = {
     stage: "details",
@@ -140,7 +192,8 @@ module.exports.projectdetails = {
         "LEFT JOIN changes " +
         "ON projectsid = project " +
         "OR projectsid IS NULL OR project IS NULL " +
-        "WHERE &cond&"
+        "WHERE &cond&",
+    goto: "changes"
 };
 
 module.exports.email = {
@@ -154,13 +207,12 @@ module.exports.email = {
         "ON clientsid = client " +
         "CROSS JOIN user " +
         "WHERE &cond& " 
-        
 };
 
 
 module.exports.status = {
     "-1": "Send email",
-     "0": "Waiting response",
+     "0": "Waiting",
      "1": "Accepted",
      "2": "Rejected"
 }

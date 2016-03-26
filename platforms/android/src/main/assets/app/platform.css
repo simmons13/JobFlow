@@ -3,6 +3,22 @@
 }
 
 .custom-actionbar {
-    background-image: url('~/images/logo.jpg');
+    /*
+    background-image: url('~/images/logoD.png');
     background-repeat: no-repeat;
+    background-position: left;
+    */
+    color:#FFFFFF;
+}
+
+.projecticon {
+    background-image: url('~/images/ic_menu_archive.png');
+    background-repeat: no-repeat;
+    background-position: 20 35;
+}
+
+.head {
+    background-image: url('~/images/ic_menu_archive.png');
+    background-repeat: no-repeat;
+    background-position: 20 35;
 }

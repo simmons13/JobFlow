@@ -165,9 +165,9 @@ function saveForm (i_this) {
     //var sqlAction = module.exports.createSQL(null, i_this);
     
     var currentView =  appSettings.getString("currentView");
-    var currentAction = appSettings.getString("currentAction");
+    var currentAction = appSettings.getString("currentAction") || "new";
 
-    var sqlAction = config[currentView] ? config[currentView].add : "";
+    var sqlAction = config[currentView] ? config[currentView][currentAction] || "" : "";
     var items = config[currentView] ? config[currentView].properties : [];
     var formId, formItem, viewId;
     var _this = i_this ? i_this : this;
@@ -182,8 +182,9 @@ function saveForm (i_this) {
             formId == "current_competion_date") 
         {
             var origId = formId.replace("current","orig");
-            var sDate = this.get(origId+"_day") + "-" + 
-                        this.get(origId+"_month") + "-" + 
+            console.error("-----"+origId+"_dayy"+":: "+this.get(origId+"_dayy"))
+            var sDate = this.get(origId+"_month") + "-" + 
+                        this.get(origId+"_dayy") + "-" + 
                         this.get(origId+"_year");
             sqlAction = sqlAction.replace("&"+ formId +"&", sDate);
         }
@@ -197,12 +198,13 @@ function saveForm (i_this) {
         }
         
         if (formId == "contract_date" || 
-            formId == "orig_competion_date" || 
-            formId == "changes_competion_date" || 
-            formId == "current_completion_date") 
+            formId == "orig_competion_date" )
+            //formId == "changes_competion_date" || 
+            //formId == "current_completion_date") 
         {
-            var sDate = this.get(formId+"_day") + "-" + 
-                        this.get(formId+"_month") + "-" + 
+            console.error("^^^:" + formId+"_dayy" + this.get(formId+"_dayy"))
+            var sDate = this.get(formId+"_month") + "-" + 
+                        this.get(formId+"_dayy") + "-" + 
                         this.get(formId+"_year");
             sqlAction = sqlAction.replace("&"+ formId +"&", sDate);        
         }
@@ -322,7 +324,10 @@ function setup() {
     SQL(config.projects.create);
     SQL(config.clients.create);
     SQL(config.changes.create);
+    
     appSettings.setString("loadingClient", "false");
+    
+    
     
 }
 

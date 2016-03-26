@@ -1,13 +1,10 @@
 
 GridLayout {
-    margin: 10;
     border: 1 solid black;
-    
 }
 
 Label {
     margin-top: 10;
-    
 }
 
 .textfield_value {

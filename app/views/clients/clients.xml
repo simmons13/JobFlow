@@ -1,20 +1,33 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   
     <Page.actionBar>
-        <ActionBar title=" " tap="gotoView"  cssClass="custom-actionbar">
+        <ActionBar title="Client Details" tap="gotoView"  cssClass="custom-actionbar">
             <ActionBar.actionItems>
-                <ActionItem text="save" tap="{{ saveForm }}" ios.position="right" />
-                <ActionItem text="drop" tap="{{ drop }}" ios.position="right" />
+                <ActionItem  tap="{{ saveForm }}" ios.position="right"  android.systemIcon="ic_menu_save" />
+                <!-- ActionItem text="drop" tap="{{ drop }}" ios.position="right" /-->
             </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
-        
-   <GridLayout columns="*" rows="auto, 50, 50, 50, 50, *"  >
-        <Label row="0" col="0" text="Client Details" class="title" textWrap="true" />
-        <TextField row="1" col="0" id="firstname" text="{{ firstname }}" hint="First Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
-        <TextField row="2" col="0" id="lastname" text="{{ lastname }}" hint="Last Name" keyboardType="text" autocorrect="false" autocapitalizationType="words" />
-        <TextField row="3" col="0" id="phone" text="{{ phone }}" hint="Phone Number" keyboardType="phone" autocorrect="false" autocapitalizationType="none" />
-        <TextField row="4" col="0" id="email" text="{{ email }}" hint="Email Address" keyboardType="text" autocorrect="false" autocapitalizationType="none" />
+    
+   <GridLayout columns="40, 70, 20, *" rows="0, auto, auto, auto, auto, auto, *"  >
 
+        <Label row="0" col="0" colspan="4" text="Client Details" class="title"  textWrap="true"/>
+        
+        <Label row="1" col="0" colSpan="3" text="First name:" class="textfield_label listtop" />
+        <TextField row="1" col="3" colSpan="1" id="firstname" text="{{ firstname }}" hint=""
+            keyboardType="text" autocorrect="false" autocapitalizationType="words" class="listtop" />
+    
+        <Label row="2" col="0" colSpan="3" text="Last name:" class="textfield_label" />
+        <TextField row="2" col="3" colSpan="1" id="lastname" text="{{ lastname }}" hint=""
+            keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+    
+        <Label row="3" col="0" colSpan="3" text="Phone number:" class="textfield_label" />
+        <TextField row="3" col="3" colSpan="1" id="phone" text="{{ phone }}" hint=""
+            keyboardType="phone" autocorrect="false" autocapitalizationType="words" />
+    
+        <Label row="4" col="0" colSpan="3" text="Email address:" class="textfield_label" />
+        <TextField row="4" col="3" colSpan="1" id="email" text="{{ email }}" hint=""
+            keyboardType="text" autocorrect="false" autocapitalizationType="words" />
+    
     </GridLayout>
 </Page>

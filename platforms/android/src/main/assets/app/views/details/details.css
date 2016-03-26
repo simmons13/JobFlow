@@ -1,11 +1,12 @@
 ListView {
-    margin: 1;
+    margin: 0;
     opacity: 0;
 }
 Label {
     padding: 5;
     horizontal-align: left;
     vertical-align: center;
+    width: 1000%;
 }
 TextField {
     border: 0;
@@ -13,27 +14,36 @@ TextField {
 }
 
 GridLayout {
-    margin: 10;
     border: 0;
     border-bottom: none;
 }
 
-ListView.itemTemplate {
-    background-color: gray;
-}
+
 
 .child {
-    height:2;
+    font-size: 18;
+    
     border-top-style: solid;
+    background-color: #3598db;
+}
+
+.list {
+    font-size: 18;
+    padding-top: 2;
 }
 
 
 .head {
-    width: 1000%;
+    font-size: 18;
     background-color: #3598db;
     background-color: #898989;
     background-color: #02318b;
-    background-color: #3598db;
+    background-color: #88D2DF;
     color: white;
-    margin-top: 20;
+    margin: 0;
+    padding: 8 5 0 30;
+    height: 40;
+    
+    
 }
+

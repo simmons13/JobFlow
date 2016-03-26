@@ -12,6 +12,7 @@ module.exports.projects = {
         {id:"orig_total", type:"text", title:"Contract total cost"},
         {id:"orig_competion_date", type:"date", title:"Contract completion date"},
         {id:"current_competion_date", type:"hidden"},
+        {id:"completed", type:"hidden"},
         {id:"current_total", type:"hidden"},
         {id:"contract_date", type:"date", title:"Contract sign date"}
     ],
@@ -22,24 +23,26 @@ module.exports.projects = {
             "orig_total VARCHAR(50), " +
             "orig_competion_date VARCHAR(50), " +
             "current_competion_date VARCHAR(50), " +
+            "completed INTEGER, " +
             "current_total VARCHAR(50), " +
             "contract_date VARCHAR(50) )",
     new: "INSERT INTO projects ( "+
             "projectssummary, client, orig_total, orig_competion_date, " +
-            "current_competion_date, current_total, contract_date" +
+            "current_competion_date, completed, current_total, contract_date" +
             ") VALUES (" +
             "'&projectssummary&', '&client&', '&orig_total&', '&orig_competion_date&', " +
-            "'&current_competion_date&', '&current_total&', '&contract_date&'" +
+            "'&current_competion_date&', 0, '&current_total&', '&contract_date&'" +
             ")",
     edit: "UPDATE projects "+
             "SET " +
             "projectssummary='&projectssummary&', client='&client&', " +
-            "contract_date='&contract_date&', orig_total='&orig_total&' " +
+            "completed=&completed&,  contract_date='&contract_date&', orig_total='&orig_total&' " +
             "WHERE projectsid=&projectsid& ",
     update: "UPDATE projects SET &cond& WHERE projectsid=&projectsid& ",
     select: "SELECT * FROM projects " +
             "INNER JOIN clients " +
             "ON clientsid = client ",
+            //"WHERE completed <> 1 ",
     goto: "details"
 };
 module.exports.user = {

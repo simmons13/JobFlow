@@ -21,6 +21,7 @@ function Projects () {
             viewModel.orig_competion_date = i_object ? i_object.orig_competion_date || "" : "";
             viewModel.contract_date = i_object ? i_object.contract_date || "" : "";
             viewModel.client = i_object ? i_object.firstname + " " + i_object.lastname || "Click to add client" : "Click to add client";
+            viewModel.completed = i_object && i_object.completed == "true" ? true : false;
             
             var dateObj;
             var date = new Date();

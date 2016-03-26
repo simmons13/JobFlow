@@ -1,15 +1,18 @@
 
 GridLayout {
-    margin: 10;
-    border: 1 solid black;    
+    margin: 10; 
 }
 
 Label {
     margin-top: 10;   
 }
 
-
 .textfield_value {
     margin-top: 6;
+    font-size: 18;
 }
 
+.textfield_button {
+    background-color: gray;
+    color:Red;
+}

@@ -1,10 +1,33 @@
 ﻿@import { url('~/platform.css') };
 
 .title {
-    font-size: 25;
-    text-align: center;
-    margin: 20;
+    background-color: #034793;
+    color: white;
     
+    font-size: 20;
+    text-align: center;
+    margin: 0;
+    padding-top:8;
+    padding-bottom:8;
+    width: 1000%;
+    
+}
+
+.smalltitle {
+    /*
+    background-color: #034793;
+    color: white;
+    */
+    background-color: #034793;
+    color: white;
+    
+    font-size: 20;
+    text-align: center;
+    margin: 0;
+}
+
+.listtop {
+    margin-top: 10;
 }
 
 .textfield_label {
@@ -16,8 +39,8 @@
 
 .textfield_dollar {
     font-size: 18;
-    text-align: left;
-    margin-left: 5;
+    text-align: right;
+    margin-right: 2;
     border-bottom: 1 black solid;
 }
 
@@ -47,16 +70,7 @@ button {
     background-color: #2dcc70;
     background-color: #238b32;
     background-color: #e3e3e3;
-}
-
-.head {
-    width: 1000%;
-    background-color: #3598db;
-    background-color: #898989;
-    background-color: #02318b;
-    background-color: #3598db;
-    color: white;
-    margin-top: 20;
+    background-color: #111222;
 }
 
 .send {
@@ -67,12 +81,21 @@ button {
     color: midnightblue;
 }
 
-.accepted {
+
+.send, .waiting {
+    color: #808080;
+}
+
+.accepted, .accepted_ {
     color: forestgreen;    
 }
 
-.rejected {
+.rejected, .rejected_ {
     color: darkred;
+}
+
+.waiting_, .send_  {
+    color: #BBBBBB;
 }
 
 
@@ -83,7 +106,3 @@ button {
     visibility: hidden;
 }
 
-
-.test {
-    color: red;
-}
